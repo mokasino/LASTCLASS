@@ -4,6 +4,7 @@
 #define _STATUSBAR_H
 
 #include <afxext.h>
+#include <afxwin.h>
 
 typedef signed long int Long;
 
@@ -18,6 +19,10 @@ public:
 
 public:
 	HWND MakeStatusBar(LastClass *lastClass, HWND hwndParent, int idStatus, HINSTANCE hinst, int cParts);
+	void ChangeStatusBarSize(RECT *rect);
+	void DestroyStatus();
+private:
+	HWND hStatus;
 };
 
 #endif // _STATUSBAR_H

@@ -8,7 +8,7 @@
 #include "SelfDependency.h"
 #include "ClassDiagramForm.h"
 #include "HistoryGraphic.h"
-
+#include "RollNameBox.h"
 DrawingDependency* DrawingDependency::instance = 0;
 
 MouseLButtonAction* DrawingDependency::Instance() {
@@ -22,13 +22,16 @@ void DrawingDependency::MouseLButtonUp(MouseLButton *mouseLButton, ClassDiagramF
 	Long index;
 	Figure *figure = 0;
 
-	//if (selection->GetLength() == 1 && dynamic_cast<Class*>(selection->GetAt(0))) {
+	Long quadrant;
+	Long quadrant2;
 
 	classDiagramForm->historyGraphic->PushUndo(diagram);
-	selection->SelectByPoint(diagram, currentX, currentY);
+	selection->SelectByPointForRelation(diagram, currentX, currentY);
 
-	if (selection->GetLength() == 2 && selection->GetAt(0) != selection->GetAt(1) && dynamic_cast<Class*>(selection->GetAt(1))) {
-
+	if (selection->GetLength() == 2 && dynamic_cast<Class*>(selection->GetAt(0)) && dynamic_cast<Class*>(selection->GetAt(1))
+		&& selection->GetAt(0) != selection->GetAt(1)) {
+		Class * classObject = dynamic_cast<Class*>(selection->GetAt(0));
+		Class * classObject2 = dynamic_cast<Class*>(selection->GetAt(1));
 		CPoint lineStart(startX, startY);
 		CPoint lineEnd(currentX, currentY);
 
@@ -45,26 +48,51 @@ void DrawingDependency::MouseLButtonUp(MouseLButton *mouseLButton, ClassDiagramF
 		rect.bottom = selection->GetAt(1)->GetY() + selection->GetAt(1)->GetHeight();
 		CPoint cross2 = finder.GetCrossPoint(lineStart, lineEnd, rect);
 
+		quadrant = finder.FindQuadrant(cross1.x, cross1.y, classObject->GetX(), classObject->GetY(),
+			classObject->GetX() + classObject->GetWidth(), classObject->GetY() + classObject->GetHeight());
+
+		quadrant2 = finder.FindQuadrant(cross2.x, cross2.y, classObject2->GetX(), classObject2->GetY(),
+			classObject2->GetX() + classObject2->GetWidth(), classObject2->GetY() + classObject2->GetHeight());
+
+		if (classObject->GetTempletePosition() != -1 && quadrant == 1
+			&& cross1.x >= classObject->GetAt(classObject->GetTempletePosition())->GetX() - 10) {
+			cross1.x = classObject->GetAt(classObject->GetTempletePosition())->GetX() - 10;
+		}
+
+		if (classObject2->GetTempletePosition() != -1 && quadrant2 == 1
+			&& cross2.x >= classObject2->GetAt(classObject2->GetTempletePosition())->GetX() - 10) {
+			cross2.x = classObject2->GetAt(classObject2->GetTempletePosition())->GetX() - 10;
+		}
+
 		Dependency object(cross1.x, cross1.y, cross2.x - cross1.x, cross2.y - cross1.y);
 		index = static_cast<FigureComposite*>(selection->GetAt(0))->Add(object.Clone());
 		figure = static_cast<FigureComposite*>(selection->GetAt(0))->GetAt(index);
-
 	}
 
-	if (selection->GetLength() == 2 && selection->GetAt(0) == selection->GetAt(1)) {
+	else if (selection->GetLength() == 2 && dynamic_cast<Class*>(selection->GetAt(0)) && selection->GetAt(0) == selection->GetAt(1)) {
 		Class *object = static_cast<Class*>(selection->GetAt(0));
-		SelfDependency selfDependency(object->GetX() + object->GetWidth() - 30, object->GetY(), 30, 30);
-		if (object->GetTempletePosition() != -1) {
-			selfDependency.Move(0, -17);
-			Long k = 0;
-			while (k < 5) {
-				CPoint cPoint(selfDependency.rollNamePoints->GetAt(k).x, selfDependency.rollNamePoints->GetAt(k).y - 17);
-				selfDependency.rollNamePoints->Modify(k, cPoint);
-				k++;
+		Long i = 0;
+		bool ret = false;
+		while (i < object->GetLength()) {
+			if (dynamic_cast<SelfRelation*>(object->GetAt(i))) {
+				ret = true;
 			}
+			i++;
 		}
-		index = object->Add(selfDependency.Clone());
-		figure = object->GetAt(index);
+		if (ret == false) {
+			SelfDependency selfDependency(object->GetX() + object->GetWidth() - 30, object->GetY(), 30, 30);
+			if (object->GetTempletePosition() != -1) {
+				selfDependency.Move(0, -17);
+				Long k = 0;
+				while (k < 5) {
+					CPoint cPoint(selfDependency.rollNamePoints->GetAt(k).x, selfDependency.rollNamePoints->GetAt(k).y - 17);
+					selfDependency.rollNamePoints->Modify(k, cPoint);
+					k++;
+				}
+			}
+			index = object->Add(selfDependency.Clone());
+			figure = object->GetAt(index);
+		}
 	}
 	selection->DeleteAllItems();
 	this->ChangeDefault(mouseLButton);

@@ -10,8 +10,8 @@ Figure::Figure() {
 	this->height = 0;
 	this->content = "";
 	this->minimumWidth = 120;
-	this->minimumHeight = 49;
-	this->lf = { 0, };
+	this->minimumHeight = 29;
+	this->fontSize = 25;
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height) {
@@ -21,7 +21,8 @@ Figure::Figure(Long x, Long y, Long width, Long height) {
 	this->height = height;
 	this->content = "";
 	this->minimumWidth = 120;
-	this->minimumHeight = 49;
+	this->minimumHeight = 29;
+	this->fontSize = 25;
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height, string content) {
@@ -31,7 +32,8 @@ Figure::Figure(Long x, Long y, Long width, Long height, string content) {
 	this->height = height;
 	this->content = content;
 	this->minimumWidth = 120; //여기도
-	this->minimumHeight = 49; // 입력받을 문자열에 맞게 값 줘야하는데
+	this->minimumHeight = 29; // 입력받을 문자열에 맞게 값 줘야하는데
+	this->fontSize = 25;
 }
 
 Figure::Figure(const Figure& source) {
@@ -42,7 +44,7 @@ Figure::Figure(const Figure& source) {
 	this->content = source.content;
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
-	this->lf = source.lf;
+	this->fontSize = source.fontSize;
 }
 
 Long Figure::GetRowCount(string object) {
@@ -60,9 +62,9 @@ Long Figure::GetRowCount(string object) {
 	return count;
 }
 
-void Figure::ReplaceString(string content, LOGFONT lf) {
+void Figure::ReplaceString(string content, Long fontSize) {
 	this->content = content;
-	this->lf = lf;
+	this->fontSize = fontSize;
 }
 void Figure::SetX(Long x) {
 	this->x = x;
@@ -113,7 +115,7 @@ Figure& Figure::operator = (const Figure& source) {
 	this->height = source.height;
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
-	this->lf = source.lf;
+	this->fontSize = source.fontSize;
 
 	return *this;
 }

@@ -14,6 +14,7 @@ class Menu;
 class ClassDiagramForm;
 class ToolBar;
 class StatusBar;
+class PrintPreview;
 class LastClass : public CFrameWnd {
 public:
 	LastClass();
@@ -22,6 +23,8 @@ public:
 	Menu *menu;
 	ToolBar *toolBar;
 	StatusBar *statusBar;
+	PrintPreview *printPreview;
+	Long one = 0;
 private:
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -35,6 +38,7 @@ protected:
 	afx_msg void OnClose();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnMyMenu(UINT parm_control_id);
+	afx_msg void OnMyToolBar(UINT parm_control_id);
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	DECLARE_MESSAGE_MAP()
 };

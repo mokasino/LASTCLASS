@@ -31,23 +31,28 @@ void EditResizerBlocker::Block(TextEdit *textEdit, CDC *pDC) {
 	textEdit->GetClientRect(&editRect);
 
 
-	if (!dynamic_cast<Relation*>(textEdit->figure) && !dynamic_cast<SelfRelation*>(textEdit->figure)) {
-
-		FigureComposite *object = dynamic_cast<FigureComposite*>(textEdit->classDiagramForm->selection->GetAt(0));
-
-		CRect rt(object->GetX(), object->GetY(), object->GetX() + object->GetWidth(), object->GetY() + object->GetHeight());
-
-		if (textEdit->text->MaxWidth(pDC) + CaretWidth > editRect.right) {
-			rt.right += textEdit->text->MaxWidth(pDC) + CaretWidth - editRect.right;
+	if (/*!dynamic_cast<Template*>(textEdit->figure) && */!dynamic_cast<Relation*>(textEdit->figure) && !dynamic_cast<SelfRelation*>(textEdit->figure)) {
+		FigureComposite *object = dynamic_cast<FigureComposite*>(((ClassDiagramForm*)(textEdit->GetParent()))->selection->GetAt(0));
+		bool progress = false;
+		if (dynamic_cast<Template*>(textEdit->figure) && textEdit->text->MaxWidth(pDC) + GabY * 2 + CaretWidth < object->GetWidth() - 30) {
+			progress = true;
 		}
-		if (textEdit->lf.lfHeight * textEdit->text->GetLength() > editRect.bottom) {
-			rt.bottom += textEdit->lf.lfHeight * textEdit->text->GetLength() - editRect.bottom;
+		else if(!dynamic_cast<Template*>(textEdit->figure)){
+			CRect rt(object->GetX(), object->GetY(), object->GetX() + object->GetWidth(), object->GetY() + object->GetHeight());
+			if (textEdit->text->MaxWidth(pDC) + CaretWidth > editRect.right) {
+				rt.right += textEdit->text->MaxWidth(pDC) + CaretWidth - editRect.right;
+			}
+			if (textEdit->GetRowHeight() * textEdit->text->GetLength() > editRect.bottom) {
+				rt.bottom += textEdit->GetRowHeight() * textEdit->text->GetLength() - editRect.bottom;
+			}
+			if (!((ClassDiagramForm*)(textEdit->GetParent()))->diagram->CheckOverlap(rt, object)) {
+				progress = true;
+			}
 		}
-
-		if (!textEdit->classDiagramForm->diagram->CheckOverlap(rt, object)) {
+		if (progress == true) {
 			editResizer.ResizeEdit(textEdit, pDC);
 			editResizer.ResizeClass(textEdit, pDC);
-			textEdit->classDiagramForm->Invalidate(false);
+			textEdit->GetParent()->Invalidate(false);
 		}
 		else {
 			undo.KeyPress(textEdit);

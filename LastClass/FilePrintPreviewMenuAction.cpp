@@ -6,6 +6,7 @@
 #include <afxwin.h>
 #include <afxext.h>
 using namespace std;
+
 FilePrintPreviewMenuAction::FilePrintPreviewMenuAction() {
 }
 FilePrintPreviewMenuAction::~FilePrintPreviewMenuAction() {
@@ -13,14 +14,14 @@ FilePrintPreviewMenuAction::~FilePrintPreviewMenuAction() {
 void FilePrintPreviewMenuAction::MenuPress(LastClass* lastClass) {
 	lastClass->classDiagramForm->selection->DeleteAllItems();
 	 
-	//CView *printView = NULL;
-	//printView->Create(NULL, "#33", WS_VISIBLE, CRect(100, 100, 700, 700), lastClass, 9999);
-	//CPrintPreviewState *pState = new CPrintPreviewState;
+	CRect rect;
+	lastClass->GetClientRect(&rect);
+	rect.bottom += 300;
 
-	//if (CView::DoPrintPreview(AFX_))
-	CCreateContext newContext;
-	newContext.m_pCurrentDoc = (CDocument*)((CFrameWnd*)AfxGetMainWnd())->GetActiveDocument();
+	lastClass->printPreview = new PrintPreview(lastClass);
+	lastClass->printPreview->Create(NULL, "printPreview", WS_VSCROLL| WS_HSCROLL, rect, NULL, NULL);
 
-	PrintPreview *printPreview = new PrintPreview(lastClass);
-	printPreview->Create(NULL, "printPreview", WS_CHILD | WS_VISIBLE  , CRect(10,10,1200,900), lastClass,10001, NULL);
+	lastClass->printPreview->ShowWindow(SW_MAXIMIZE);
+
+	lastClass->printPreview->UpdateWindow();
 }

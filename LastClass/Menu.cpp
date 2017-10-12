@@ -25,6 +25,12 @@
 #include "NewMenuAction.h"
 #include "FilePrintPreviewMenuAction.h"
 #include "SupportMenuAction.h"
+#include "FilePrintMenuAction.h"
+#include "GraphicCtrlCutMenuAction.h"
+#include "GraphicCtrlCopyMenuAction.h"
+#include "GraphicCtrlPasteMenuAction.h"
+#include "DeleteGraphicKeyMenuAction.h"
+#include "AboutMenuAction.h"
 
 Menu::Menu(LastClass* lastClass) {
 	this->lastClass = lastClass;
@@ -52,9 +58,10 @@ Menu::Menu(LastClass* lastClass) {
 	this->popupMenu->AppendMenu(MF_STRING, 103, "다른이름으로 저장(A)");
 	this->popupMenu->AppendMenu(MF_STRING, 104, "미리보기(F)");
 	this->popupMenu->AppendMenu(MF_STRING, 105, "인쇄하기(P)");
-	this->popupMenu->AppendMenu(MF_STRING, 106, "끝내기(X)");
+	this->popupMenu->AppendMenu(MF_STRING, 106, "지우기(D)");
 	this->editMenu->AppendMenu(MF_STRING, 107, "복사하기(C)");
 	this->editMenu->AppendMenu(MF_STRING, 108, "붙여넣기(V)");
+	this->editMenu->AppendMenu(MF_STRING, 109, "자르기(X)");
 	this->editMenu->AppendMenu(MF_STRING, 123, "되돌리기(Z)");
 	this->editMenu->AppendMenu(MF_STRING, 124, "재실행(Y)");
 	this->drawMenu->AppendMenu(MF_STRING , 110, "클래스 그리기(Q)"); //
@@ -71,6 +78,7 @@ Menu::Menu(LastClass* lastClass) {
 	this->relationMenu->AppendMenu(MF_STRING, 120, "복합연관(9)");
 	this->relationMenu->AppendMenu(MF_STRING, 121, "메모라인(0)");
 	this->supportMenu->AppendMenu(MF_STRING, 122, "도움말(H)");
+	this->supportMenu->AppendMenu(MF_STRING, 125, "LastClass 정보(A)");
 
 	//this->supportMenu->Detach();
 	//this->drawMenu->Detach();
@@ -98,6 +106,7 @@ MenuAction* Menu::MenuSelected( UINT parm_control_id) {
 	case 102: this->menuAction = new SaveMenuAction; break;
 	case 103: this->menuAction = new SaveAsMenuAction; break;
 	case 104: this->menuAction = new FilePrintPreviewMenuAction; break; // 더
+	case 105: this->menuAction = new FilePrintMenuAction; break;
 	case 110: this->menuAction = new ClassMenuAction; break;
 	case 111: this->menuAction = new MemoBoxMenuAction; break;
 	case 112: this->menuAction = new GeneralizationMenuAction; break;
@@ -111,8 +120,11 @@ MenuAction* Menu::MenuSelected( UINT parm_control_id) {
 	case 120: this->menuAction = new CompositionsMenuAction; break;
 	case 121: this->menuAction = new MemoLineMenuAction; break;
 	case 122: this->menuAction = new SupportMenuAction; break;
-		//case 107: 
-		//case 108:
+	case 125: this->menuAction = new AboutMenuAction; break;
+	case 106:this->menuAction = new DeleteGraphicKeyMenuAction; break;
+	case 107:this->menuAction = new GraphicCtrlCopyMenuAction; break;
+	case 108:this->menuAction = new GraphicCtrlPasteMenuAction; break;
+	case 109: this->menuAction = new GraphicCtrlCutMenuAction; break;
 	case 123: this->menuAction = new GraphicCtrlUndoMenuAction; break;
 	case 124: this->menuAction = new GraphicCtrlRedoMenuAction; break;
 	default: break;

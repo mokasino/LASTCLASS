@@ -7,64 +7,72 @@
 #include "WritingVisitor.h"
 #include "Diagram.h"
 #include "PrintPreviewState.h"
+#include "ToolBar.h"
+
+#include "PrintPreviewButton.h"
+#include "PrintPreviewButtonAction.h"
+
 #include <afxwin.h>
 #include <afxdlgs.h>
 #include <afxpriv.h>
 using namespace std;
 
-BEGIN_MESSAGE_MAP(PrintPreview,CWnd)
+BEGIN_MESSAGE_MAP(PrintPreview, CWnd)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
+	//ON_WM_VSCROLL()
+	ON_WM_MOUSEWHEEL()
 	ON_WM_CLOSE()
-	ON_BN_CLICKED(1,OnNextButton)
-	ON_BN_CLICKED(2, OnPriviousButton)
-	ON_BN_CLICKED(3, OnPrintButton)
+	ON_COMMAND_RANGE(1, 5, OnCommandButton)
 END_MESSAGE_MAP()
+
 PrintPreview::PrintPreview(LastClass *lastClass) {
 	this->lastClass = lastClass;
+	this->printPreviewButton = NULL;
+
 	this->nextButton = NULL;
-	this->priviousButton = NULL;
+	this->previousButton = NULL;
 	this->printButton = NULL;
+	this->printZoomIn = NULL;
+	this->printZoomOut = NULL;
+
 	this->horizontalPage = 0;
 	this->verticalPage = 0;
+	this->horizontalPageSize = 2000;
+	this->verticalPageSize = 2000;
+	this->zoomRate = 100;
 }
+
 int PrintPreview::OnCreate(LPCREATESTRUCT lpCreateStruct) {
-	CWnd::OnCreate(lpCreateStruct);
-	this->ModifyStyle(0, WS_OVERLAPPEDWINDOW);
-	this->nextButton = new CButton;
-	this->nextButton->Create("다음", WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON|BS_CENTER|BS_VCENTER,CRect(800,200,880,240), this, 1);
-	this->priviousButton = new CButton;
-	this->priviousButton->Create("이전", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(800, 250, 880, 290), this, 2);
-	this->printButton = new CButton;
-	this->printButton->Create("인쇄", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(800, 300, 880, 340), this, 3);
-	
-	this->SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE );
-	this->SetFocus();
-	this->lastClass->classDiagramForm->EnableWindow(false);
-	this->OnFilePrintPreview();
-	Invalidate();
+   CFrameWnd::OnCreate(lpCreateStruct);
+   
+   this->printPreviewButton = new PrintPreviewButton;
 
-	//this->OnFilePrintPreview();
-	//this->OnFilePrintPreview();
-	return 0;
-}
-void PrintPreview::OnFilePrintPreview() {/*
-	CPrintPreviewState *pState = new CPrintPreviewState;
+   this->ModifyStyle(0, WS_OVERLAPPEDWINDOW  );
+   this->nextButton = new CButton;
+   this->nextButton->Create("다음 페이지", WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON|BS_CENTER|BS_VCENTER,CRect(50,100,200,140), this, 1);
+   this->previousButton = new CButton;
+   this->previousButton->Create("이전 페이지", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(50, 150, 200, 190), this, 2);
+   this->printButton = new CButton;
+   this->printButton->Create("인쇄하기", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(50, 200, 200, 240), this, 3);
+   this->printZoomIn = new CButton;
+   //this->printZoomIn->Create("확 대", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(50, 250, 200, 290), this, 4);
+   this->printZoomOut = new CButton;
+  // this->printZoomOut->Create("축 소", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_VCENTER, CRect(50, 300, 200, 340), this, 5);
 
-	if (!DoPrintPreview(AFX_IDD_PREVIEW_TOOLBAR, this, RUNTIME_CLASS(PrintPreviewState), pState)) {
-		TRACE0("Error: DoPrintPreView failed");
-		AfxMessageBox(AFX_IDP_COMMAND_FAILURE); 
-		delete pState;
-	}
-	*/
-	
-}
-BOOL PrintPreview::OnPreparePrinting(CPrintInfo *pInfo) {/*
-	BOOL ret = CView::OnPreparePrinting(pInfo);
-		return ret;*/
-	return true;
+   this->SetFocus();
+   this->SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
+
+   this->SetScrollRange(SB_VERT, 0, 380);
+
+   this->lastClass->EnableWindow(false);
+   //this->lastClass->classDiagramForm->EnableWindow(false);
+   
+   Invalidate();
+   
+   return 0;
 }
 void PrintPreview::OnPaint() {
 	
@@ -89,14 +97,54 @@ void PrintPreview::OnPaint() {
 	WritingVisitor writingVisitor;
 	this->lastClass->classDiagramForm->diagram->Accept(writingVisitor, &memDC);
 
-	dc.FillSolidRect(rec, RGB(153,153,153));
-	dc.StretchBlt(10, 10, 600, 800, &memDC, (this->horizontalPage * 800), (this->verticalPage * 1000), 800,1000, SRCCOPY);
+	// 흰종이 사이즈
+	Long a = (rec.CenterPoint().x)* 5 / 8;
+	Long b = (rec.CenterPoint().y)* 1 / 6;
+	Long c = (rec.CenterPoint().x) * 11 / 8 - (rec.CenterPoint().x) * 5 / 8;
+	Long d = (rec.CenterPoint().y) * 11 / 6 - (rec.CenterPoint().y) * 1 / 6;
+	
+	CBitmap *pOldBitmapOne;
+	CBitmap bitmapOne;
+	CDC memDCOne;
+	memDCOne.CreateCompatibleDC(&dc);
+	bitmapOne.CreateCompatibleBitmap(&dc, rec.Width(), rec.Height());
+	pOldBitmapOne = memDCOne.SelectObject(&bitmapOne);
+	//회색바탕 준비
+	memDCOne.FillSolidRect(rec, RGB(153, 153, 153));
+	//회색바탕 전체화면으로 출력
+	dc.BitBlt(0, 0, rec.Width(), rec.Height(), &memDCOne, 0, 0, SRCCOPY);
+	////////////////////////////////////////////////////////////
+	//회색바탕 고정하고, 확대한 흰종이에서 이동 가능하게
+	dc.SetMapMode(MM_ISOTROPIC);
+	dc.SetWindowExt(100, 100);
+	dc.SetViewportExt(this->zoomRate, this->zoomRate);
+	//dc.SetViewportOrg(220, 20);
+
+	Long vertPos = this->GetScrollPos(SB_VERT);
+	//Long horzPos = this->GetScrollPos(SB_HORZ);
+
+	//흰종이 출력
+	memDCOne.StretchBlt(a,b - vertPos,c,d - vertPos,&memDC, this->horizontalPage, this->verticalPage, this->horizontalPageSize, this->verticalPageSize, SRCCOPY);
+
+	//회색바탕에 흰종이 같이 출력
+	dc.BitBlt(0, 0, rec.Width(), rec.Height(), &memDCOne, 0, 0, SRCCOPY);
+
+	CString tempString = _T("");
+	tempString.Format(_T("해상도 (가로:%d 세로:%d), 모니터길이 (가로:%d 세로:%d)"),
+		dc.GetDeviceCaps(HORZRES),
+		dc.GetDeviceCaps(VERTRES),
+		dc.GetDeviceCaps(HORZSIZE),
+		dc.GetDeviceCaps(VERTSIZE));
+	dc.TextOutA(10, 10, tempString);
 
 	memDC.SelectObject(oldFont);
 	cFont.DeleteObject();
 	memDC.SelectObject(pOldBitmap);
 	bitmap.DeleteObject();
 	memDC.DeleteDC();
+	memDCOne.SelectObject(pOldBitmap);
+	bitmapOne.DeleteObject();
+	memDCOne.DeleteDC();
 	
 }
 void PrintPreview::OnDraw(CDC *cdc) {
@@ -114,7 +162,7 @@ void PrintPreview::OnPrint(CDC *cdc, CPrintInfo *pInfo, UINT page) {
 	this->lastClass->classDiagramForm->GetClientRect(&rect);
 	CBitmap *pOldBitmap;
 	CBitmap bitmap;
-
+	
 	CPaintDC dc(this);
 
 	memDC.CreateCompatibleDC(&dc);
@@ -146,194 +194,134 @@ void PrintPreview::OnPrint(CDC *cdc, CPrintInfo *pInfo, UINT page) {
 	memDCOne.SetMapMode(mapMode);
 	cdc->SetStretchBltMode(COLORONCOLOR);
 
+	cdc->SetMapMode(MM_ISOTROPIC);
+	cdc->SetWindowExt(100, 100);
+	cdc->SetViewportExt(this->zoomRate, this->zoomRate);
+
 	cdc->StretchBlt(100, 100, width - 200, hegiht - 200, &memDCOne, 0, 0, 2000, 2000, SRCCOPY);
 
 }
+
+BOOL PrintPreview::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
+	CFrameWnd::SetFocus();
+	SetFocus();
+	bool ret = false;
+
+	// nWheelScrollLines 휠 한번에 이동하는 줄 수 (Reg에서 읽어 온다)
+	HKEY hKey = 0;
+	DWORD dwType = REG_BINARY;
+	DWORD dwSize = 10;
+	BYTE* pByte = new BYTE[dwSize];
+
+	ZeroMemory(pByte, dwSize);
+
+	RegOpenKey(HKEY_CURRENT_USER, "Control Panel\\Desktop", &hKey);
+	RegQueryValueEx(hKey, "WheelScrollLines", NULL, &dwType, pByte, &dwSize);
+	RegCloseKey(hKey);
+
+	int nWheelScrollLines = atoi((char*)pByte);
+	delete pByte;
+
+	int vertCurPos = GetScrollPos(SB_VERT);
+
+	if (GetKeyState(VK_CONTROL) >= 0) {
+		if (zDelta <= 0) { //마우스 휠 다운
+			vertCurPos += nWheelScrollLines * 20;
+		}
+		else {  //마우스 휠 업
+			vertCurPos -= nWheelScrollLines * 20;
+		}
+		ret = true;
+	}
+	else {
+		if (zDelta <= 0) { //마우스 휠 다운
+			this->zoomRate -= 10;
+			if (this->zoomRate < 50) {
+				this->zoomRate = 50;
+			}
+		}
+		else {  //마우스 휠 업
+			this->zoomRate += 10;
+			if (this->zoomRate > 190) {
+				this->zoomRate = 190;
+			}
+		}
+		ret = true;
+	}
+	SetScrollPos(SB_VERT, vertCurPos);
+	Invalidate(false);
+
+	return ret;
+}
+
 void PrintPreview::OnClose() {
-	this->lastClass->classDiagramForm->EnableWindow(true);
+	this->lastClass->EnableWindow(true);
 	if (this->nextButton != 0) {
 		delete this->nextButton;
 	}
 	if (this->printButton != 0) {
 		delete this->printButton;
 	}
-	if (this->priviousButton != 0) {
-		delete this->priviousButton;
+	if (this->previousButton != 0) {
+		delete this->previousButton;
+	}
+	if (this->printZoomIn != 0) {
+		delete this->printZoomIn;
+	}
+	if (this->printZoomOut != 0) {
+		delete this->printZoomOut;
 	}
 	if (this != 0) {
+		this->lastClass->printPreview = NULL;
 		delete this;
 	}
 }
 
-void PrintPreview::OnNextButton() {
-	this->verticalPage++;
-	if (this->verticalPage > 1) {
-		this->horizontalPage++;
-		this->verticalPage = 0;
-	}
-	if (this->horizontalPage > 4) {
-		this->horizontalPage = 4;
-		this->verticalPage = 1;
-	}
-	//RedrawWindow();
-	Invalidate(false);
-}
-void PrintPreview::OnPriviousButton() {
-	this->verticalPage--;
-	if (this->verticalPage < 0) {
-		this->horizontalPage--;
-		this->verticalPage = 1;
-	}
-	if (this->horizontalPage < 0) {
-		this->horizontalPage = 0;
-		this->verticalPage = 0;
-	}
-	//RedrawWindow();
-	Invalidate(false);
-}
 void PrintPreview::OnBeginPrinting(CDC *pDc, CPrintInfo *pInfo) {
-
+	
 }
 
 void PrintPreview::OnEndPrinting(CDC *pDc, CPrintInfo *pInfo) {
-
-}
-void PrintPreview::OnPrintButton() {
-	CPrintDialog printDialog(false);
-	if (printDialog.DoModal() != IDCANCEL) {
-		CDC dc;
-		dc.Attach(printDialog.GetPrinterDC());
-		dc.m_bPrinting = TRUE;
-
-		CString strTitle;
-		strTitle.LoadString(AFX_IDS_APP_TITLE);
-		DOCINFO di;
-		ZeroMemory(&di, sizeof(DOCINFO));
-		di.cbSize = sizeof(DOCINFO);
-		di.lpszDocName = strTitle;
-
-		BOOL bPrintingOK = dc.StartDoc(&di);
-
-		CPrintInfo Info;
-		Info.m_rectDraw.SetRect(0, 0, dc.GetDeviceCaps(HORZRES),dc.GetDeviceCaps(VERTRES));
-		Info.SetMaxPage(2);
-		OnBeginPrinting(&dc, &Info);
-		for (UINT page = Info.GetMinPage(); page <= Info.GetMaxPage() && bPrintingOK; page++) {
-			dc.StartPage();
-			Info.m_nCurPage = page;
-			this->OnPrint(&dc,&Info,page);
-
-			bPrintingOK = (dc.EndPage() > 0);
-
-		}
-		this->OnEndPrinting(&dc, &Info);
-		if (bPrintingOK) dc.EndDoc();
-		else dc.AbortDoc();
-
-		dc.Detach();
+	this->lastClass->EnableWindow(true);
+	if (this->nextButton != 0) {
+		delete this->nextButton;
 	}
+	if (this->printPreviewButton != 0) {
+		delete this->printPreviewButton;
+	}
+	if (this->printButton != 0) {
+		delete this->printButton;
+	}
+	if (this->previousButton != 0) {
+		delete this->previousButton;
+	}
+	if (this->printZoomIn != 0) {
+		delete this->printZoomIn;
+	}
+	if (this->printZoomOut != 0) {
+		delete this->printZoomOut;
+	}
+	if (this != 0) {
+		this->lastClass->printPreview = NULL;
+		delete this;
+	}
+}
 
+void PrintPreview::OnSize(UINT nType, int cx, int cy) {
+	Invalidate(false);
+}
+BOOL PrintPreview::DoModal() {
+	if (this->GetParent()) {
+		this->GetParent()->EnableWindow(FALSE);
+		RunModalLoop(MLF_SHOWONIDLE);
+		DestroyWindow();
+	}
+	return TRUE;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-//		DeleteDC(hDC);
-//	}
-//}
-//	dlg.DoModal();
-//	CDC dc;
-//	if (dc.Attach(dlg.CreatePrinterDC())) {
-//		DOCINFO info;
-//
-//		memset(&info, 0, sizeof(DOCINFO));
-//		info.cbSize = sizeof(DOCINFO);
-//		dc.StartDoc(&info);
-//		dc.StartPage();
-//		
-//		CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-//		cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-//			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-//		SetFont(&cFont, TRUE);
-//		CFont *oldFont = dc.SelectObject(&cFont);
-//
-//		DrawingVisitor drawingVisitor;
-//		this->lastClass->classDiagramForm->diagram->Accept(drawingVisitor, &dc);
-//		WritingVisitor writingVisitor;
-//		this->lastClass->classDiagramForm->diagram->Accept(writingVisitor, &dc);
-//		dc.EndPage();
-//		dc.EndDoc();
-//		dc.DeleteDC();
-//	}
-//}
-//	dlg.DoModal();
-//	
-//	CDC dc;
-//	CPaintDC dcp(this);
-//	if (dc.Attach(dlg.CreatePrinterDC())) {
-//		DOCINFO info;
-//		memset(&info, 0, sizeof(DOCINFO));
-//		info.cbSize = sizeof(DOCINFO);
-//		dc.StartDoc(&info);
-//		//dc.StartPage();
-//
-//		HDC hDC = dlg.GetPrinterDC();
-//		int nPageWidth = GetDeviceCaps(hDC, HORZRES);
-//		int nPageHeight = GetDeviceCaps(hDC, VERTRES);
-//
-//
-//		CDC memDC;
-//		CRect rect;
-//		this->lastClass->classDiagramForm->GetClientRect(&rect);
-//		CBitmap *pOldBitmap;
-//		CBitmap bitmap;
-//		memDC.CreateCompatibleDC(&dcp);
-//		bitmap.CreateCompatibleBitmap(&dcp, 4000, 2000);
-//		pOldBitmap = memDC.SelectObject(&bitmap);
-//		memDC.FillSolidRect(CRect(0, 0, 4000, 2000), RGB(255, 255, 255));
-//		CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-//		cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-//			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-//		SetFont(&cFont, TRUE);
-//		CFont *oldFont = memDC.SelectObject(&cFont);
-//
-//		DrawingVisitor drawingVisitor;
-//		this->lastClass->classDiagramForm->diagram->Accept(drawingVisitor, &memDC);
-//		WritingVisitor writingVisitor;
-//		this->lastClass->classDiagramForm->diagram->Accept(writingVisitor, &memDC);
-//		
-//		Long i = 0;
-//		while (i < 5) {
-//			dc.StartPage();
-//			int mapMode = dc.GetMapMode();
-//			memDC.SetMapMode(mapMode);
-//			dc.SetStretchBltMode(HALFTONE);
-//			
-//			//dc.BitBlt(0, 0, nPageWidth, nPageHeight, &memDC,0, 0, SRCCOPY);
-//			//dc.StretchBlt(0, 0, nPageWidth, nPageHeight, &memDC, 0,0, i * 400, i * 200, SRCCOPY);
-//			dc.StretchBlt(0, 0,0,0, &memDC,i*400,i*200, (i*400) - nPageWidth, (i*200) - nPageHeight, SRCCOPY);
-//			//::RestoreDC(dc,-1);
-//			dc.EndPage();
-//			i++;
-//		}
-//		memDC.SelectObject(oldFont);
-//		cFont.DeleteObject();
-//		memDC.SelectObject(pOldBitmap);
-//		bitmap.DeleteObject();
-//		memDC.DeleteDC();
-//		//dc.EndPage();
-//
-//		dc.EndDoc();
-//
-//		dc.DeleteDC();
-//
-//	}
+void PrintPreview::OnCommandButton(UINT idNumber) {
+	PrintPreviewButtonAction *buttonPressed = this->printPreviewButton->ButtonPressed(idNumber);
+	if (buttonPressed != 0) {
+		buttonPressed->ButtonPress(this);
+	}
 }
