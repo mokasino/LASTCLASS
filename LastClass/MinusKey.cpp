@@ -18,7 +18,7 @@ MinusKey::~MinusKey() {
 }
 
 void MinusKey::KeyPress(TextEdit *textEdit) {
-	textEdit->classDiagramForm->fontSet->lf.lfHeight -= 1;
+	textEdit->lf.lfHeight -= 1;
 }
 
 void MinusKey::KeyPress(ClassDiagramForm *classDiagramForm, CDC *cdc) {

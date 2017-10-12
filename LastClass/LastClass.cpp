@@ -51,7 +51,7 @@ int LastClass::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	rect.left += 60;
 	rect.right -= 60;
 	rect.bottom -= 75;
-	this->classDiagramForm = new ClassDiagramForm(this);
+	this->classDiagramForm = new ClassDiagramForm();
 	this->classDiagramForm->Create(NULL, "classDiagramForm", WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL, rect, this, 100000);
 
 	this->menu = new Menu(this);
@@ -82,9 +82,9 @@ void LastClass::OnSetFocus(CWnd* pOldWnd) {
 void LastClass::OnSize(UINT nType, int cx, int cy) {
 	CFrameWnd::OnSize(nType, cx, cy);
 
-	this->toolBar->MakeToolBar(this->GetSafeHwnd());
-	this->toolBar->MakeAnotherToolBar(this->GetSafeHwnd());
-	this->statusBar->MakeStatusBar(this, this->GetSafeHwnd(), NULL, NULL, 5);
+	//this->toolBar->MakeToolBar(this->GetSafeHwnd());
+	//this->toolBar->MakeAnotherToolBar(this->GetSafeHwnd());
+	//this->statusBar->MakeStatusBar(this, this->GetSafeHwnd(), NULL, NULL, 5);
 
 	CRect rect;
 	this->GetClientRect(&rect);

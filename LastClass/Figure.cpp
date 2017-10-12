@@ -11,6 +11,7 @@ Figure::Figure() {
 	this->content = "";
 	this->minimumWidth = 120;
 	this->minimumHeight = 49;
+	this->lf = { 0, };
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height) {
@@ -41,6 +42,7 @@ Figure::Figure(const Figure& source) {
 	this->content = source.content;
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
+	this->lf = source.lf;
 }
 
 Long Figure::GetRowCount(string object) {
@@ -111,7 +113,7 @@ Figure& Figure::operator = (const Figure& source) {
 	this->height = source.height;
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
-	this->fontSize = source.fontSize;
+	this->lf = source.lf;
 
 	return *this;
 }

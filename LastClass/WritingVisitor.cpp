@@ -22,20 +22,20 @@ void WritingVisitor::Visit(Diagram *diagram, Selection *selection, Long distance
 void WritingVisitor::Visit(Class *object, CDC* cPaintDc) {
 }
 void WritingVisitor::Visit(Text* text, CDC* cPaintDc) {
-	
-	Long fontHeight = cPaintDc->GetTextExtent("아").cy; // rowHeight 구하는방법
+	LOGFONT lf;
+	CFont *pFont = cPaintDc->GetCurrentFont();
+	pFont->GetLogFont(&lf);
+	Long textHeight = lf.lfHeight;
 	Long textWidth = text->MaxWidth(cPaintDc);
 	
-	RECT rt = { 0 , 0, textWidth, text->GetLength() * fontHeight };
+	RECT rt = { 0 , 0, textWidth, text->GetLength() *  textHeight };
 	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
 }
 
 void  WritingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
-	CFont font;
-	font.CreateFont(13, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
-	CFont*  oldFont;
-	oldFont = cPaintDc->SelectObject(&font);
+	CFont cFont;
+	cFont.CreateFontIndirect(&selfRelation->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	Long i = 0;
 	while (i < 5) {
 		if (i == 0) {
@@ -56,15 +56,13 @@ void  WritingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
 		i++;
 	}
 	cPaintDc->SelectObject(oldFont);
-	font.DeleteObject();
+	cFont.DeleteObject();
 }
 
 void  WritingVisitor::Visit(Relation *relation, CDC *pDC) {
-	CFont font;
-	font.CreateFont(13, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
-	CFont*  oldFont;
-	oldFont = pDC->SelectObject(&font);
+	CFont cFont;
+	cFont.CreateFontIndirect(&relation->lf);
+	CFont *oldFont = pDC->SelectObject(&cFont);
 	Long i = 0;
 	while (i < 5) {
 		if (i == 1) {
@@ -80,35 +78,65 @@ void  WritingVisitor::Visit(Relation *relation, CDC *pDC) {
 		i++;
 	}
 	pDC->SelectObject(oldFont);
-	font.DeleteObject();
+	cFont.DeleteObject();
 }
 
 void WritingVisitor::Visit(MemoBox *memoBox, CDC *cPaintDc) { //접힌부분아래로 적히게
+	CFont cFont;
+	cFont.CreateFontIndirect(&memoBox->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { memoBox->GetX() + GabX , memoBox->GetY() + MemoGab + GabY, memoBox->GetX() + memoBox->GetWidth() - GabX, memoBox->GetY() + memoBox->GetHeight() - GabY };
 	cPaintDc->DrawText((CString)memoBox->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 void WritingVisitor::Visit(Selection *selection, CDC *cPaintDc) {
 }
 void WritingVisitor::Visit(Template *object, CDC *cPaintDc) {
+	CFont cFont;
+	cFont.CreateFontIndirect(&object->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { object->GetX() + GabX , object->GetY() + GabY, object->GetX() + object->GetWidth() - GabX, object->GetY() + object->GetHeight() - GabY };
 	cPaintDc->DrawText((CString)object->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 
 void WritingVisitor::Visit(ClassName* className, CDC* cPaintDc) {
+	CFont cFont;
+	cFont.CreateFontIndirect(&className->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { className->GetX() + GabX , className->GetY() + MemoGab + GabY, className->GetX() + className->GetWidth() - GabX, className->GetY() + className->GetHeight() - GabY };
 	cPaintDc->DrawText((CString)className->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 void WritingVisitor::Visit(Attribute* attribute, CDC* cPaintDc) {
+	CFont cFont;
+	cFont.CreateFontIndirect(&attribute->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { attribute->GetX() + GabX , attribute->GetY() + GabY, attribute->GetX() + attribute->GetWidth() - GabX, attribute->GetY() + attribute->GetHeight() - GabY };
 	cPaintDc->DrawText((CString)attribute->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 void WritingVisitor::Visit(Method* method, CDC* cPaintDc) {
+	CFont cFont;
+	cFont.CreateFontIndirect(&method->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { method->GetX() + GabX , method->GetY() + GabY, method->GetX() + method->GetWidth() - GabX, method->GetY() + method->GetHeight() - GabY };
 	cPaintDc->DrawText((CString)method->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 void WritingVisitor::Visit(Reception* reception, CDC* cPaintDc) {
+	CFont cFont;
+	cFont.CreateFontIndirect(&reception->lf);
+	CFont *oldFont = cPaintDc->SelectObject(&cFont);
 	RECT rt = { reception->GetX() + GabX , reception->GetY() + GabY, reception->GetX() + reception->GetWidth() - GabX, reception->GetY() + reception->GetHeight() - GabX };
 	cPaintDc->DrawText((CString)reception->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->SelectObject(oldFont);
+	cFont.DeleteObject();
 }
 
 void WritingVisitor::Visit(Line *line, CDC* cPaintDc) {

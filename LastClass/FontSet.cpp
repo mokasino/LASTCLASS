@@ -4,6 +4,8 @@
 #include "ClassDiagramForm.h"
 #include "TextEdit.h"
 
+#pragma warning(disable:4996)
+
 FontSet::FontSet() {
 	this->lf = { 0, };
 }

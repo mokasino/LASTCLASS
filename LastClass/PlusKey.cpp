@@ -18,7 +18,7 @@ PlusKey::~PlusKey() {
 }
 
 void PlusKey::KeyPress(TextEdit *textEdit) {
-	textEdit->classDiagramForm->fontSet->lf.lfHeight += 1;
+	textEdit->lf.lfHeight += 1;
 }
 
 void PlusKey::KeyPress(ClassDiagramForm *classDiagramForm, CDC *cdc) {

@@ -19,7 +19,7 @@ UpArrowKey::~UpArrowKey() {
 }
 
 void UpArrowKey::KeyPress(TextEdit *textEdit) {
-	CPaintDC dc(textEdit);
+	CClientDC dc(textEdit);
 	if (GetKeyState(VK_SHIFT) >= 0) {
 		if (textEdit->flagSelection == 1) {
 			textEdit->flagSelection = 0;
@@ -33,9 +33,8 @@ void UpArrowKey::KeyPress(TextEdit *textEdit) {
 		}
 	}
 	CFont cFont;
-	cFont.CreateFont(textEdit->rowHeight, 0, 0, 0, textEdit->fontSet->GetFontWeight(), FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, textEdit->fontSet->GetFaceName().c_str());
-	textEdit->SetFont(&cFont, TRUE);
+	cFont.CreateFontIndirect(&textEdit->lf);
+	textEdit->p_oldFont = dc.SelectObject(&cFont);
 
 	CFont *oldFont = dc.SelectObject(&cFont); // 폰트 시작
 
@@ -44,14 +43,14 @@ void UpArrowKey::KeyPress(TextEdit *textEdit) {
 	Long previousCharacterIndex = textEdit->caret->GetCharacterIndex();
 	Long previousRowIndex = textEdit->caret->GetRowIndex();
 
-	Long rowIndex = y - textEdit->GetRowHeight();
+	Long rowIndex = y - textEdit->lf.lfHeight;
 
 	textEdit->caret->MoveToPoint(textEdit, &dc, CPoint(x, rowIndex));
 	if (previousCharacterIndex == textEdit->text->GetAt(previousRowIndex)->GetLength() &&
 		previousRowIndex > 0) {
 		textEdit->caret->SetCharacterIndex(textEdit->text->GetAt(textEdit->caret->GetRowIndex())->GetLength());
 	}
-	dc.SelectObject(oldFont);
+	dc.SelectObject(textEdit->p_oldFont);
 	cFont.DeleteObject(); // 폰트
 }
 

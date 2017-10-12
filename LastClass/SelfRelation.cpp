@@ -45,8 +45,9 @@ SelfRelation& SelfRelation::operator=(const SelfRelation& source) {
 	return *this;
 }
 
-void SelfRelation::ReplaceString(string rollNameText, Long rollNameBoxIndex) {
+void SelfRelation::ReplaceString(string rollNameText, Long rollNameBoxIndex, LOGFONT& lf) {
 	this->rollNames->Modify(rollNameBoxIndex, rollNameText);
+	this->lf = lf;
 }
 
 void SelfRelation::Accept(Visitor& visitor, CDC *cPaintDc) {

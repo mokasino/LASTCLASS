@@ -32,7 +32,7 @@ public:
 	Long Remove(Long index);
 	void MergePoints(Long selectIndex, CPoint cPoint);
 
-	void ReplaceString(string rollNameText, Long rollNameBoxIndex);
+	void ReplaceString(string rollNameText, Long rollNameBoxIndex, LOGFONT& lf);
 	void Accept(Visitor& visitor, CDC *cPaintDc);
 
 	void MovePaste(Long distanceX, Long distanceY);

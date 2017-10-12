@@ -47,41 +47,41 @@ void DefaultState::MouseLButtonUp(MouseLButton *mouseLButton, ClassDiagramForm *
 }
 void DefaultState::MouseLButtonDown(MouseLButton *mouseLButton, Diagram *diagram, Selection *selection, Long  startX, Long startY, Long currentX, Long currentY) {
 	UINT object = mouseLButton->GetButtonState();
-	if (object == 49) {
-		this->ChangeState(mouseLButton, DrawingClass::Instance(), 49);
-	}
 	if (object == 81) {
 		this->ChangeState(mouseLButton, DrawingMemoBox::Instance(), 81);
 	}
-	if (object == 50) {
-		this->ChangeState(mouseLButton, DrawingGeneralization::Instance(), 50);
-	}
-	if (object == 55) {
-		this->ChangeState(mouseLButton, DrawingAggregation::Instance(), 55);
-	}
-	if (object == 56) {
-		this->ChangeState(mouseLButton, DrawingAggregations::Instance(), 56);
-	}
-	if (object == 53) {
-		this->ChangeState(mouseLButton, DrawingAssociation::Instance(), 53);
-	}
-	if (object == 57) {
-		this->ChangeState(mouseLButton, DrawingComposition::Instance(), 57);
-	}
-	if (object == 48) {
+	if (object == 48) { //0
 		this->ChangeState(mouseLButton, DrawingCompositions::Instance(), 48);
 	}
-	if (object == 52) {
+	if (object == 49) { //1
+		this->ChangeState(mouseLButton, DrawingClass::Instance(), 49);
+	}
+	if (object == 50) { //2
+		this->ChangeState(mouseLButton, DrawingGeneralization::Instance(), 50);
+	}
+	if (object == 51) { //3
+		this->ChangeState(mouseLButton, DrawingRealization::Instance(), 51);
+	}
+	if (object == 52) { //4
 		this->ChangeState(mouseLButton, DrawingDependency::Instance(), 52);
 	}
-	if (object == 54) {
+	if (object == 53) { //5
+		this->ChangeState(mouseLButton, DrawingAssociation::Instance(), 53);
+	}
+	if (object == 54) { //6
 		this->ChangeState(mouseLButton, DrawingDirectedAssociation::Instance(), 54);
+	}
+	if (object == 55) { //7
+		this->ChangeState(mouseLButton, DrawingAggregation::Instance(), 55);
+	}
+	if (object == 56) { //8
+		this->ChangeState(mouseLButton, DrawingAggregations::Instance(), 56);
+	}
+	if (object == 57) { //9
+		this->ChangeState(mouseLButton, DrawingComposition::Instance(), 57);
 	}
 	if (object == 87) {
 		this->ChangeState(mouseLButton, DrawingMemoLine::Instance(), 87);
-	}
-	if (object == 51) {
-		this->ChangeState(mouseLButton, DrawingRealization::Instance(), 51);
 	}
 	if (object == 0) {
 

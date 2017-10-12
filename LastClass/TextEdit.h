@@ -63,7 +63,7 @@ public:
 	Figure *figure;
 	Long rollNameBoxIndex;
 	LOGFONT lf;
-	CFont cFont;
+	CFont *p_oldFont;
 	ClassDiagramForm *classDiagramForm;
 private:
 	Long koreanEnglish; //flag

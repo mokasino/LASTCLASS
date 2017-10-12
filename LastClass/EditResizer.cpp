@@ -37,7 +37,7 @@ void EditResizer::ResizeEdit(TextEdit *textEdit, CDC *cdc) {
 	}
 
 	if (textEdit->text->MaxWidth(cdc) + GabX * 2 + CaretWidth > textEdit->GetCriteriaWidth()) {         //글너비가 클래스를 넘어가는데
-		if (textEdit->GetRowHeight()*textEdit->text->GetLength() + gabY_ > textEdit->GetCriteriaHeight()) {
+		if (textEdit->lf.lfHeight*textEdit->text->GetLength() + gabY_ > textEdit->GetCriteriaHeight()) {
 			resizer.ResizeEditAll(textEdit, cdc);                                          //글높이가 클래스를 넘어가면 둘다O
 		}
 		else if (!dynamic_cast<Template*>(textEdit->figure)) {                                 //글높이가 클래스를 안넘어가면 너비만
@@ -48,7 +48,7 @@ void EditResizer::ResizeEdit(TextEdit *textEdit, CDC *cdc) {
 
 		}
 	}                                                                           //글너비가 클래스를 안넘어가는데
-	else if (textEdit->GetRowHeight()*textEdit->text->GetLength() + gabY_ > textEdit->GetCriteriaHeight()) {
+	else if (textEdit->lf.lfHeight*textEdit->text->GetLength() + gabY_ > textEdit->GetCriteriaHeight()) {
 		resizer.ResizeEditHeight(textEdit, cdc);
 	}
 	else {
@@ -81,7 +81,7 @@ void EditResizer::ResizeClass(TextEdit *textEdit, CDC *cdc) {
 				textEdit->figure->SetMinimumWidth(textEdit->text->MaxWidth(cdc) + GabX * 2);
 			}
 		}
-		textEdit->figure->SetMinimumHeight(textEdit->GetRowHeight()*textEdit->text->GetLength() + gabY_);
+		textEdit->figure->SetMinimumHeight(textEdit->lf.lfHeight*textEdit->text->GetLength() + gabY_);
 		resizer.ResizeClassWidth(textEdit);
 		resizer.ResizeClassHeight(textEdit);
 	}

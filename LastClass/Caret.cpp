@@ -25,7 +25,7 @@ Caret::~Caret() {
 
 void Caret::MoveToIndex(TextEdit *textEdit, CDC *pDC) {
 	Long pointX = 0;													 //가로
-	Long pointY = this->rowIndex * textEdit->GetRowHeight();         //세로
+	Long pointY = this->rowIndex * textEdit->lf.lfHeight;         //세로
 	CString str;
 	Long column = 0;
 	Long tabWidth = 0;
@@ -33,12 +33,12 @@ void Caret::MoveToIndex(TextEdit *textEdit, CDC *pDC) {
 
 	pointX += textEdit->text->GetAt((this->rowIndex))->GetRowWidth(pDC, this->characterIndex);
 
-	textEdit->CreateSolidCaret(2, textEdit->GetRowHeight());
+	textEdit->CreateSolidCaret(2, textEdit->lf.lfHeight);
 	if (textEdit->GetFlagBuffer() == 1) {
-		textEdit->CreateSolidCaret(-pDC->GetTextExtent(textEdit->text->GetAt(this->rowIndex)->GetAt(this->characterIndex - 1)->MakeCString()).cx, textEdit->GetRowHeight());
+		textEdit->CreateSolidCaret(-pDC->GetTextExtent(textEdit->text->GetAt(this->rowIndex)->GetAt(this->characterIndex - 1)->MakeCString()).cx, textEdit->lf.lfHeight);
 	}
 	if (textEdit->GetFlagInsert() == 1 && this->characterIndex < textEdit->text->GetAt(this->rowIndex)->GetLength()) {
-		textEdit->CreateSolidCaret(pDC->GetTextExtent(textEdit->text->GetAt(this->rowIndex)->GetAt(this->characterIndex)->MakeCString()).cx, textEdit->GetRowHeight());
+		textEdit->CreateSolidCaret(pDC->GetTextExtent(textEdit->text->GetAt(this->rowIndex)->GetAt(this->characterIndex)->MakeCString()).cx, textEdit->lf.lfHeight);
 	}
 	this->currentCaretX = pointX;
 	this->currentCaretY = pointY;
@@ -55,7 +55,7 @@ void Caret::MoveToPoint(TextEdit *textEdit, CDC *pDC, CPoint point) {
 
 	Long height = 0;
 	while (y > 0 && height <= y && this->rowIndex < textEdit->text->GetLength()) {
-		height += textEdit->GetRowHeight();
+		height += textEdit->lf.lfHeight;
 		this->rowIndex++;
 	}
 	if (y > 0 && textEdit->text->GetLength() > 0) {

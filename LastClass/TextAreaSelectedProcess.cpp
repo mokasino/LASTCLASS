@@ -58,7 +58,7 @@ void TextAreaSelectedProcess::SingleLineSelected(TextEdit *textEdit, CDC *pDC, C
 	Long width = textEdit->text->GetAt(this->startRowIndex)->GetRowWidth(pDC, this->endCharacterIndex, this->startCharacterIndex);
 	Long x = textEdit->text->GetAt(this->startRowIndex)->GetRowWidth(pDC, this->startCharacterIndex);
 
-	*rt = { x, startRowIndex * textEdit->rowHeight, x + width, startRowIndex * textEdit->rowHeight + textEdit->rowHeight };
+	*rt = { x, startRowIndex * textEdit->lf.lfHeight, x + width, startRowIndex * textEdit->lf.lfHeight + textEdit->lf.lfHeight };
 }   //메모리버퍼 사용안할때 사용할 rt
 
 void TextAreaSelectedProcess::FirstMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt) {
@@ -73,7 +73,7 @@ void TextAreaSelectedProcess::FirstMultiLineSelected(TextEdit *textEdit, CDC *pD
 		textEdit->text->GetAt(this->startRowIndex)->GetLength(), this->startCharacterIndex);
 	Long x = textEdit->text->GetAt(this->startRowIndex)->GetRowWidth(pDC, this->startCharacterIndex);
 
-	*rt = { x, this->startRowIndex * textEdit->rowHeight, x + width, this->startRowIndex * textEdit->rowHeight + textEdit->rowHeight };
+	*rt = { x, this->startRowIndex * textEdit->lf.lfHeight, x + width, this->startRowIndex * textEdit->lf.lfHeight + textEdit->lf.lfHeight };
 }   //메모리버퍼 사용안할때 사용할 rt
 
 void TextAreaSelectedProcess::MiddleMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt) {
@@ -85,8 +85,8 @@ void TextAreaSelectedProcess::MiddleMultiLineSelected(TextEdit *textEdit, CDC *p
 		i++;
 	}
 	
-	*rt = { 0, (this->startRowIndex + 1) * textEdit->rowHeight, textEdit->GetFigure()->GetX() + textEdit->GetFigure()->GetWidth(),
-		(this->endRowIndex - 1) * textEdit->rowHeight + textEdit->rowHeight };
+	*rt = { 0, (this->startRowIndex + 1) * textEdit->lf.lfHeight, textEdit->GetFigure()->GetX() + textEdit->GetFigure()->GetWidth(),
+		(this->endRowIndex - 1) * textEdit->lf.lfHeight + textEdit->lf.lfHeight };
 }   //메모리버퍼 사용안할때 사용할 rt
 
 void TextAreaSelectedProcess::EndMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt) {
@@ -98,5 +98,5 @@ void TextAreaSelectedProcess::EndMultiLineSelected(TextEdit *textEdit, CDC *pDC,
 	}
 	Long width = textEdit->text->GetAt(this->endRowIndex)->GetRowWidth(pDC, this->endCharacterIndex - 1);
 	
-	*rt = { 0, this->endRowIndex * textEdit->rowHeight, width, this->endRowIndex * textEdit->rowHeight + textEdit->rowHeight };
+	*rt = { 0, this->endRowIndex * textEdit->lf.lfHeight, width, this->endRowIndex * textEdit->lf.lfHeight + textEdit->lf.lfHeight };
 }   //메모리버퍼 사용안할때 사용할 rt
