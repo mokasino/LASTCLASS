@@ -18,7 +18,7 @@ class TextAreaSelected;
 class FontSet;
 class TextEdit : public CWnd { // CWnd 상속으로 바꿔야함
 public:
-	TextEdit(ClassDiagramForm *classDiagramForm, Figure *figure, LOGFONT lf, Long rollNameBoxIndex = -1);
+	TextEdit(ClassDiagramForm *classDiagramForm, Figure *figure, Long rollNameBoxIndex = -1);
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();
@@ -66,9 +66,6 @@ public:
 	Long flagBuffer; //flag
 	Figure *figure;
 	Long rollNameBoxIndex;
-	Long numLockFlag;
-	LOGFONT lf;
-	CFont cFont;
 private:
 	Long koreanEnglish; //flag
 	Long currentX;
