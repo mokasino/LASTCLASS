@@ -19,6 +19,8 @@ PlusKey::~PlusKey() {
 
 void PlusKey::KeyPress(TextEdit *textEdit) {
 	textEdit->lf.lfHeight += 1;
+	FontSet fontSet;
+	fontSet.ApplyFont(textEdit);
 }
 
 void PlusKey::KeyPress(ClassDiagramForm *classDiagramForm, CDC *cdc) {

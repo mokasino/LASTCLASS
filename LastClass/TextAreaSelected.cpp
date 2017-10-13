@@ -27,29 +27,42 @@ void TextAreaSelected::SelectTextArea(TextEdit *textEdit, CDC *pDC) {
 	CString TopCstr;
 	CString middleCstr;
 	CString BottomCstr;
-	RECT rt;
-
-	pDC->SetTextColor(RGB(255, 255, 255));
-	pDC->SetBkColor(RGB(51, 153, 255));
-	pDC->SetBkMode(OPAQUE);//텍스트 배경을 SetBkColor 사용
+	CRect rt;
+	CBrush cBrush;
+	CBrush *oldBrush;
+	cBrush.CreateSolidBrush(RGB(51, 153, 255));
+	CPen cPen;
+	CPen *oldPen;
+	cPen.CreatePen(PS_NULL, 0, RGB(51, 153, 255));
+	//pDC->SetTextColor(RGB(255, 255, 255));
+	//pDC->SetBkColor(RGB(51, 153, 255));
+	//pDC->SetBkMode(OPAQUE);//텍스트 배경을 SetBkColor 사용
 
 	selected->GetRange(textEdit);
 	if (textEdit->selectedY == textEdit->caret->GetRowIndex()) {
 		this->selected->SingleLineSelected(textEdit, pDC, &TopCstr, &rt);
-		pDC->DrawText(TopCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
+		oldBrush = pDC->SelectObject(&cBrush);
+		oldPen = pDC->SelectObject(&cPen);
+		pDC->Rectangle(rt);
+		//pDC->DrawText(TopCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
 	}
 	else {
 		this->selected->FirstMultiLineSelected(textEdit, pDC, &TopCstr, &rt);
-		pDC->DrawText(TopCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
+		//pDC->DrawText(TopCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
 		if (this->selected->GetStartRowIndex() + 1 < this->selected->GetEndRowIndex()) {
 			this->selected->MiddleMultiLineSelected(textEdit, pDC, &middleCstr, &rt);
-			pDC->DrawText(middleCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
+			pDC->SelectObject(&cBrush);
+			pDC->Rectangle(&rt);
+			//pDC->DrawText(middleCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
 		}
-
+		pDC->SelectObject(&textEdit->cFont);
 		this->selected->EndMultiLineSelected(textEdit, pDC, &BottomCstr, &rt);
-		pDC->DrawText(BottomCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
+		oldBrush = pDC->SelectObject(&cBrush);
+		pDC->Rectangle(&rt);
+		//pDC->DrawText(BottomCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
 	}
-
+	pDC->SelectObject(oldBrush);
+	cBrush.DeleteObject();
 	
 	textEdit->copyBuffer = TopCstr + middleCstr + BottomCstr;
 

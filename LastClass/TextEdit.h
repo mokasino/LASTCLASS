@@ -8,6 +8,7 @@
 
 typedef signed long int Long;
 
+class ClassDiagramForm;
 class Text;
 class Figure;
 class Caret;
@@ -15,7 +16,6 @@ class KeyBoard;
 class HistoryText;
 class TextAreaSelected;
 class FontSet;
-class ClassDiagramForm;
 class TextEdit : public CWnd { // CWnd 상속으로 바꿔야함
 public:
 	TextEdit(ClassDiagramForm *classDiagramForm, Figure *figure, LOGFONT lf, Long rollNameBoxIndex = -1);
@@ -42,6 +42,7 @@ public:
 	Long GetSelectedY() const;
 
 	Figure* GetFigure() const;
+	Long GetRowHeight() const;
 	Long GetKoreanEnglish() const;
 	Long GetFlagBuffer() const;
 	CString GetCopyBuffer() const;
@@ -49,24 +50,28 @@ public:
 	Long GetCriteriaWidth() const;
 	Long GetCriteriaHeight() const;
 public:
+	ClassDiagramForm *classDiagramForm;
 	Text *text;
 	Caret *caret;
 	KeyBoard *keyBoard;
 	HistoryText *historyText;
 	TextAreaSelected *textAreaSelected;
+	FontSet *fontSet;
 	Long flagInsert; //flag
 	Long flagSelection;
+	Long rowHeight; //figure에서 저장을 해줘야 하기때문에 삭제가능
 	Long selectedX; //보류
 	Long selectedY; //보류
 	CString copyBuffer;
 	Long flagBuffer; //flag
 	Figure *figure;
 	Long rollNameBoxIndex;
+	Long numLockFlag;
 	LOGFONT lf;
-	CFont *p_oldFont;
-	ClassDiagramForm *classDiagramForm;
+	CFont cFont;
 private:
 	Long koreanEnglish; //flag
+	Long currentX;
 	Long criteriaX;
 	Long criteriaWidth;
 	Long criteriaHeight;
@@ -77,6 +82,9 @@ inline Long TextEdit::GetFlagInsert() const {
 }
 inline Figure* TextEdit::GetFigure() const {
 	return const_cast<Figure*>(this->figure);
+}
+inline Long TextEdit::GetRowHeight() const {
+	return this->rowHeight;
 }
 inline Long TextEdit::GetKoreanEnglish() const {
 	return this->koreanEnglish;

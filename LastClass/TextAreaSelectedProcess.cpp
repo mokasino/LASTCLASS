@@ -48,7 +48,7 @@ void TextAreaSelectedProcess::GetRange(TextEdit* textEdit) {
 	}
 }
 
-void TextAreaSelectedProcess::SingleLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt) {
+void TextAreaSelectedProcess::SingleLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, CRect *rt) {
 	Long i = startCharacterIndex;
 
 	while (i < endCharacterIndex) { // Ã¹ÁÙ

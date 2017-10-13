@@ -41,6 +41,7 @@ public:
 	Long Load();
 	Long Save();
 	CString fileName;
+	LOGFONT lf;
 public:
 	Long GetCurrentX() const;
 	Long GetCurrentY() const;

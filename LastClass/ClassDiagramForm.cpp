@@ -41,6 +41,7 @@
 #include "HistoryGraphic.h"
 #include "KeyBoard.h"
 #include "KeyAction.h"
+#include "FontSet.h"
 
 #include "ToolBar.h"
 #include "StatusBar.h"
@@ -95,520 +96,520 @@ ClassDiagramForm::ClassDiagramForm(LastClass *lastClass) { // 생성자 맞는듯
 }
 
 Long ClassDiagramForm::Load() {
-	Long position = -1;
-	Long i;
-	Long x = 0;
-	Long y = 0;
-	Long width = 0;
-	Long height = 0;
-	Long length = 0;
-	Long index;
-	Long type = 0;
-	Long relationLength = 0;
-	FigureFactory factory;
-	Figure *figure;
-	ifstream fTest;
-	Long j;
-	Long l;
-	Long rowLength = 0;
-	Long fontSize = 0;
-	string temp1;
-	string temp2;
+	//Long position = -1;
+	//Long i;
+	//Long x = 0;
+	//Long y = 0;
+	//Long width = 0;
+	//Long height = 0;
+	//Long length = 0;
+	//Long index;
+	//Long type = 0;
+	//Long relationLength = 0;
+	//FigureFactory factory;
+	//Figure *figure;
+	//ifstream fTest;
+	//Long j;
+	//Long l;
+	//Long rowLength = 0;
+	//Long fontSize = 0;
+	//string temp1;
+	//string temp2;
 
 
-	//CFileDialog  dlgFile(true, "txt", "*", NULL, "텍스트 문서(*.txt)");
-	//if (dlgFile.DoModal() == IDOK)
-	//{
-	//	this->fileName = dlgFile.GetPathName();
+	////CFileDialog  dlgFile(true, "txt", "*", NULL, "텍스트 문서(*.txt)");
+	////if (dlgFile.DoModal() == IDOK)
+	////{
+	////	this->fileName = dlgFile.GetPathName();
+	////}
+	//fTest.open(this->fileName);
+	////fTest.open("text.txt");
+	////종류 구별을 위한 마지막 칸 
+	//// 0 = Class, 1 = MemoBox, 2 = Line, 3 = Template, 4 = Generalization(일반화), 5 = Realization(실체화), 6 = Dependency(의존), 7 = Association(연관화),
+	//// 8 = DirectedAssociation(직접연관),  9 = Aggregation(집합), 10 = Aggregations(집합연관), 11 =  Composition(합성), 12 = Compositions(복합연관), 13 = MemoLine
+	//// 14 = ClassName , 15 = Attribute , 16 = Method , 17 = Reception
+
+	//if (fTest.is_open()) {  
+	//	getline(fTest, temp1);
+	//	sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %d", &length, &x, &y, &width, &height, &type);
+	//	while (!fTest.eof()) {
+	//		figure = factory.Create(x, y, width, height, type);
+	//		position = this->diagram->Add(figure);
+	//		FigureComposite *figureComposite = static_cast<FigureComposite*>(this->diagram->GetAt(position));
+	//		if (type == 7) {   //메모박스이면
+	//			getline(fTest, temp1);
+	//			sscanf_s((CString)temp1.c_str(), "%d %d",&fontSize, &rowLength);
+	//			j = 0;
+	//			temp2.clear();
+	//			while (j < rowLength) {
+	//				getline(fTest, temp1);
+	//				temp2.append(temp1);
+	//				temp2.append("\n");
+	//				j++;
+	//			}
+	//				Long k = temp2.find_last_of('\n');
+	//				temp2.replace(k, 1, "\0");
+	//				figureComposite->ReplaceString(temp2, fontSize);
+	//		
+	//		}
+	//		i = 0;
+	//		while (position != -1 && i < length) {
+	//			getline(fTest, temp1);
+	//			sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d", &x, &y, &width, &height, &type); //말단객체
+	//			figure = factory.Create(x, y, width, height, type);
+	//		
+	//			if (type < 7 && type != 2) {
+	//				getline(fTest, temp1);
+	//				sscanf_s((CString)temp1.c_str(), "%d %d", &fontSize, &rowLength);
+	//				temp2.clear();
+	//				j = 0;
+	//				while (j < rowLength) {
+	//					getline(fTest, temp1);
+	//					temp2.append(temp1);
+	//					temp2.append("\n");
+	//					j++;
+	//				}
+	//					Long k = temp2.find_last_of('\n');
+	//					temp2.replace(k, 1, "\0");
+	//					figure->ReplaceString(temp2, fontSize);
+	//					if (type == 3) {
+	//						static_cast<Class*>(figureComposite)->Add(static_cast<Attribute*>(figure));
+	//					}
+	//					else if (type == 4) {
+	//						static_cast<Class*>(figureComposite)->Add(static_cast<Method*>(figure));
+	//					}
+	//					else if (type == 5) {
+	//						static_cast<Class*>(figureComposite)->Add(static_cast<Reception*>(figure));
+	//					}
+	//					else if (type == 6) {
+	//						static_cast<Class*>(figureComposite)->Add(static_cast<Template*>(figure));
+	//					}
+	//					else {
+	//						figureComposite->Add(figure); 
+	//					}
+	//			}
+	//			if (type >= 8 && type <= 17) {
+	//				getline(fTest, temp1);
+	//				sscanf_s((CString)temp1.c_str(), "%d", &relationLength);
+	//				Long cPointX;
+	//				Long cPointY;
+	//				CPoint cPoint;
+	//				index = figureComposite->Add(figure);
+	//				Relation *relation = static_cast<Relation*>(figureComposite->GetAt(index));
+	//				j = 0;
+	//				while (j < relationLength) {
+	//					getline(fTest, temp1);
+	//					sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
+	//					cPoint.x = cPointX;
+	//					cPoint.y = cPointY;
+	//					relation->Add(cPoint);
+	//					j++;
+	//				}
+	//				if (type != 8) {
+	//					l = 0;
+	//					while (l < 5) {
+	//						getline(fTest, temp1);
+	//						if (temp1 != "") {
+	//							relation->rollNames->Modify(l, temp1);
+	//						}
+	//						getline(fTest, temp1);
+	//						sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
+	//						cPoint.x = cPointX;
+	//						cPoint.y = cPointY;
+	//						relation->rollNamePoints->Modify(l, cPoint);
+	//						l++;
+	//					}
+	//				}
+	//			}
+	//			if (type >= 18 && type <= 25) {
+	//				Long cPointX;
+	//				Long cPointY;
+	//				CPoint cPoint;
+	//				index = figureComposite->Add(figure);
+	//				SelfRelation *selfRelation = static_cast<SelfRelation*>(figureComposite->GetAt(index));
+	//				l = 0;
+	//				while (l < 5) {
+	//					getline(fTest, temp1);
+	//					if (temp1 != "") {
+	//						selfRelation->rollNames->Modify(l, temp1);
+	//					}
+	//					getline(fTest, temp1);
+	//					sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
+	//					cPoint.x = cPointX;
+	//					cPoint.y = cPointY;
+	//					selfRelation->rollNamePoints->Modify(l, cPoint);
+	//					l++;
+	//				}
+	//			}
+	//			if (type == 2) {
+	//				figureComposite->Add(figure);
+	//			}
+	//			i++;
+	//		}
+	//		getline(fTest, temp1);
+	//		sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %d", &length, &x, &y, &width, &height, &type);
+	//	}
 	//}
-	fTest.open(this->fileName);
-	//fTest.open("text.txt");
-	//종류 구별을 위한 마지막 칸 
-	// 0 = Class, 1 = MemoBox, 2 = Line, 3 = Template, 4 = Generalization(일반화), 5 = Realization(실체화), 6 = Dependency(의존), 7 = Association(연관화),
-	// 8 = DirectedAssociation(직접연관),  9 = Aggregation(집합), 10 = Aggregations(집합연관), 11 =  Composition(합성), 12 = Compositions(복합연관), 13 = MemoLine
-	// 14 = ClassName , 15 = Attribute , 16 = Method , 17 = Reception
-
-	if (fTest.is_open()) {  
-		getline(fTest, temp1);
-		sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %d", &length, &x, &y, &width, &height, &type);
-		while (!fTest.eof()) {
-			figure = factory.Create(x, y, width, height, type);
-			position = this->diagram->Add(figure);
-			FigureComposite *figureComposite = static_cast<FigureComposite*>(this->diagram->GetAt(position));
-			if (type == 7) {   //메모박스이면
-				getline(fTest, temp1);
-				sscanf_s((CString)temp1.c_str(), "%d %d",&fontSize, &rowLength);
-				j = 0;
-				temp2.clear();
-				while (j < rowLength) {
-					getline(fTest, temp1);
-					temp2.append(temp1);
-					temp2.append("\n");
-					j++;
-				}
-					Long k = temp2.find_last_of('\n');
-					temp2.replace(k, 1, "\0");
-					figureComposite->ReplaceString(temp2, fontSize);
-			
-			}
-			i = 0;
-			while (position != -1 && i < length) {
-				getline(fTest, temp1);
-				sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d", &x, &y, &width, &height, &type); //말단객체
-				figure = factory.Create(x, y, width, height, type);
-			
-				if (type < 7 && type != 2) {
-					getline(fTest, temp1);
-					sscanf_s((CString)temp1.c_str(), "%d %d", &fontSize, &rowLength);
-					temp2.clear();
-					j = 0;
-					while (j < rowLength) {
-						getline(fTest, temp1);
-						temp2.append(temp1);
-						temp2.append("\n");
-						j++;
-					}
-						Long k = temp2.find_last_of('\n');
-						temp2.replace(k, 1, "\0");
-						figure->ReplaceString(temp2, fontSize);
-						if (type == 3) {
-							static_cast<Class*>(figureComposite)->Add(static_cast<Attribute*>(figure));
-						}
-						else if (type == 4) {
-							static_cast<Class*>(figureComposite)->Add(static_cast<Method*>(figure));
-						}
-						else if (type == 5) {
-							static_cast<Class*>(figureComposite)->Add(static_cast<Reception*>(figure));
-						}
-						else if (type == 6) {
-							static_cast<Class*>(figureComposite)->Add(static_cast<Template*>(figure));
-						}
-						else {
-							figureComposite->Add(figure); 
-						}
-				}
-				if (type >= 8 && type <= 17) {
-					getline(fTest, temp1);
-					sscanf_s((CString)temp1.c_str(), "%d", &relationLength);
-					Long cPointX;
-					Long cPointY;
-					CPoint cPoint;
-					index = figureComposite->Add(figure);
-					Relation *relation = static_cast<Relation*>(figureComposite->GetAt(index));
-					j = 0;
-					while (j < relationLength) {
-						getline(fTest, temp1);
-						sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
-						cPoint.x = cPointX;
-						cPoint.y = cPointY;
-						relation->Add(cPoint);
-						j++;
-					}
-					if (type != 8) {
-						l = 0;
-						while (l < 5) {
-							getline(fTest, temp1);
-							if (temp1 != "") {
-								relation->rollNames->Modify(l, temp1);
-							}
-							getline(fTest, temp1);
-							sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
-							cPoint.x = cPointX;
-							cPoint.y = cPointY;
-							relation->rollNamePoints->Modify(l, cPoint);
-							l++;
-						}
-					}
-				}
-				if (type >= 18 && type <= 25) {
-					Long cPointX;
-					Long cPointY;
-					CPoint cPoint;
-					index = figureComposite->Add(figure);
-					SelfRelation *selfRelation = static_cast<SelfRelation*>(figureComposite->GetAt(index));
-					l = 0;
-					while (l < 5) {
-						getline(fTest, temp1);
-						if (temp1 != "") {
-							selfRelation->rollNames->Modify(l, temp1);
-						}
-						getline(fTest, temp1);
-						sscanf_s((CString)temp1.c_str(), "%d %d", &cPointX, &cPointY);
-						cPoint.x = cPointX;
-						cPoint.y = cPointY;
-						selfRelation->rollNamePoints->Modify(l, cPoint);
-						l++;
-					}
-				}
-				if (type == 2) {
-					figureComposite->Add(figure);
-				}
-				i++;
-			}
-			getline(fTest, temp1);
-			sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %d", &length, &x, &y, &width, &height, &type);
-		}
-	}
-	fTest.close();
+	//fTest.close();
 
 	return this->diagram->GetLength();
 }
 
 Long ClassDiagramForm::Save() {
-	Long k;
-	Long i = 0;
-	Long j;
-	Long l;
-	Long rowLength;
-	Long fontSize;
-	FigureComposite *object = 0;
-	Figure *figure = 0;
-	SelfRelation *selfRelation = 0;
-	CPoint cPoint;
-	string saveText;
-	ofstream fTest;
-	//CString fileName;
-		//CFileDialog  dlgFile(false,"txt","*", OFN_CREATEPROMPT | OFN_OVERWRITEPROMPT,"텍스트 문서(*.txt)");
-		//if (dlgFile.DoModal() == IDOK)
-		//{
-			//fileName = dlgFile.GetPathName();
-		//}
-	fTest.open(this->fileName);
-	if (fTest.is_open()) {
-		while (i < this->diagram->GetLength()) {
-			//종류 구별을 위한 마지막 칸 
-			// 0 = Class, 1 = MemoBox, 2 = Line, 3 = Template, 4 = Generalization(일반화), 5 = Realization(실체화), 
-			//6 = Dependency(의존), 7 = Association(연관화),
-			// 8 = DirectedAssociation(직접연관),  9 = Aggregation(집합), 10 = Aggregations(집합연관), 
-			//11 =  Composition(합성), 12 = Compositions(복합연관), 13 = MemoLine
-			// 14 = ClassName , 15 = Attribute , 16 = Method , 17 = Reception , 18 =SelfGeneralization ,
-			//19 = SelfDependency , 20 = SelfAssociation , 21 = SelfDirectedAssociation
-			// 22 = SelfAggregation , 23 = SelfAggregations , 24 =SelfComposition , 25 = SelfCompositions
-			j = 0;
-			if (dynamic_cast<Class*>(this->diagram->GetAt(i))) {
-				object = static_cast<FigureComposite*>(this->diagram->GetAt(i));
-				fTest << object->GetLength() << " " << object->GetX() << " " << object->GetY()
-					<< " " << object->GetWidth() << " " << object->GetHeight() << " " << 0 << endl;
-				while (j < object->GetLength())
-				{
+	//Long k;
+	//Long i = 0;
+	//Long j;
+	//Long l;
+	//Long rowLength;
+	//Long fontSize;
+	//FigureComposite *object = 0;
+	//Figure *figure = 0;
+	//SelfRelation *selfRelation = 0;
+	//CPoint cPoint;
+	//string saveText;
+	//ofstream fTest;
+	////CString fileName;
+	//	//CFileDialog  dlgFile(false,"txt","*", OFN_CREATEPROMPT | OFN_OVERWRITEPROMPT,"텍스트 문서(*.txt)");
+	//	//if (dlgFile.DoModal() == IDOK)
+	//	//{
+	//		//fileName = dlgFile.GetPathName();
+	//	//}
+	//fTest.open(this->fileName);
+	//if (fTest.is_open()) {
+	//	while (i < this->diagram->GetLength()) {
+	//		//종류 구별을 위한 마지막 칸 
+	//		// 0 = Class, 1 = MemoBox, 2 = Line, 3 = Template, 4 = Generalization(일반화), 5 = Realization(실체화), 
+	//		//6 = Dependency(의존), 7 = Association(연관화),
+	//		// 8 = DirectedAssociation(직접연관),  9 = Aggregation(집합), 10 = Aggregations(집합연관), 
+	//		//11 =  Composition(합성), 12 = Compositions(복합연관), 13 = MemoLine
+	//		// 14 = ClassName , 15 = Attribute , 16 = Method , 17 = Reception , 18 =SelfGeneralization ,
+	//		//19 = SelfDependency , 20 = SelfAssociation , 21 = SelfDirectedAssociation
+	//		// 22 = SelfAggregation , 23 = SelfAggregations , 24 =SelfComposition , 25 = SelfCompositions
+	//		j = 0;
+	//		if (dynamic_cast<Class*>(this->diagram->GetAt(i))) {
+	//			object = static_cast<FigureComposite*>(this->diagram->GetAt(i));
+	//			fTest << object->GetLength() << " " << object->GetX() << " " << object->GetY()
+	//				<< " " << object->GetWidth() << " " << object->GetHeight() << " " << 0 << endl;
+	//			while (j < object->GetLength())
+	//			{
 
-					k = 0;
-					l = 0;
-					if (dynamic_cast<ClassName*>(object->GetAt(j))) {
-						figure = static_cast<ClassName*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
-						rowLength = figure->GetRowCount(figure->GetContent());
-						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
-							<< figure->GetHeight() << " " << 1 << endl;
-						fTest << fontSize << " " << rowLength << endl;
-						fTest << figure->GetContent() << endl;
-					}
-					else if (dynamic_cast<Line*>(object->GetAt(j))) {
-						figure = object->GetAt(j);
-						fTest << figure->GetX() << " " << figure->GetY() << " " <<
-							figure->GetWidth() << " " << figure->GetHeight() << " " << 2 << endl;
-					}
-					else if (dynamic_cast<Attribute*>(object->GetAt(j))) {
-						figure = static_cast<Attribute*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
-						rowLength = figure->GetRowCount(figure->GetContent());
-						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
-							<< figure->GetHeight() << " " << 3 << endl;
-						fTest << fontSize << " " << rowLength << endl;
-						fTest << figure->GetContent() << endl;
-					}
-					else if (dynamic_cast<Method*>(object->GetAt(j))) {
-						figure = static_cast<Method*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
-						rowLength = figure->GetRowCount(figure->GetContent());
-						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
-							<< figure->GetHeight() << " " << 4 << endl;
-						fTest << fontSize << " " << rowLength << endl;
-						fTest << figure->GetContent() << endl;
-					}
-					else if (dynamic_cast<Reception*>(object->GetAt(j))) {
-						figure = static_cast<Reception*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
-						rowLength = figure->GetRowCount(figure->GetContent());
-						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
-							<< figure->GetHeight() << " " << 5 << endl;
-						fTest << fontSize << " " << rowLength << endl;
-						fTest << figure->GetContent() << endl;
-					}
-					else if (dynamic_cast<Template*>(object->GetAt(j))) {
-						figure = object->GetAt(j);
-						fontSize = figure->GetFontSize();
-						rowLength = figure->GetRowCount(figure->GetContent());
-						fTest << figure->GetX() << " " << figure->GetY() << " " <<
-							figure->GetWidth() << " " << figure->GetHeight() << " " << 6 << endl;
-						fTest << fontSize << " " << rowLength << endl;
-						fTest << figure->GetContent() << endl;
-					}
-					else if (dynamic_cast<MemoLine*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 8 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-					}
-					else if (dynamic_cast<Generalization*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 9 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Realization*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 10 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Dependency*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 11 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Association*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 12 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<DirectedAssociation*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 13 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Aggregation*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 14 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Aggregations*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 15 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
+	//				k = 0;
+	//				l = 0;
+	//				if (dynamic_cast<ClassName*>(object->GetAt(j))) {
+	//					figure = static_cast<ClassName*>(object->GetAt(j));
+	//					fontSize = figure->GetFontSize();
+	//					rowLength = figure->GetRowCount(figure->GetContent());
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
+	//						<< figure->GetHeight() << " " << 1 << endl;
+	//					fTest << fontSize << " " << rowLength << endl;
+	//					fTest << figure->GetContent() << endl;
+	//				}
+	//				else if (dynamic_cast<Line*>(object->GetAt(j))) {
+	//					figure = object->GetAt(j);
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " <<
+	//						figure->GetWidth() << " " << figure->GetHeight() << " " << 2 << endl;
+	//				}
+	//				else if (dynamic_cast<Attribute*>(object->GetAt(j))) {
+	//					figure = static_cast<Attribute*>(object->GetAt(j));
+	//					fontSize = figure->GetFontSize();
+	//					rowLength = figure->GetRowCount(figure->GetContent());
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
+	//						<< figure->GetHeight() << " " << 3 << endl;
+	//					fTest << fontSize << " " << rowLength << endl;
+	//					fTest << figure->GetContent() << endl;
+	//				}
+	//				else if (dynamic_cast<Method*>(object->GetAt(j))) {
+	//					figure = static_cast<Method*>(object->GetAt(j));
+	//					fontSize = figure->GetFontSize();
+	//					rowLength = figure->GetRowCount(figure->GetContent());
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
+	//						<< figure->GetHeight() << " " << 4 << endl;
+	//					fTest << fontSize << " " << rowLength << endl;
+	//					fTest << figure->GetContent() << endl;
+	//				}
+	//				else if (dynamic_cast<Reception*>(object->GetAt(j))) {
+	//					figure = static_cast<Reception*>(object->GetAt(j));
+	//					fontSize = figure->GetFontSize();
+	//					rowLength = figure->GetRowCount(figure->GetContent());
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
+	//						<< figure->GetHeight() << " " << 5 << endl;
+	//					fTest << fontSize << " " << rowLength << endl;
+	//					fTest << figure->GetContent() << endl;
+	//				}
+	//				else if (dynamic_cast<Template*>(object->GetAt(j))) {
+	//					figure = object->GetAt(j);
+	//					fontSize = figure->GetFontSize();
+	//					rowLength = figure->GetRowCount(figure->GetContent());
+	//					fTest << figure->GetX() << " " << figure->GetY() << " " <<
+	//						figure->GetWidth() << " " << figure->GetHeight() << " " << 6 << endl;
+	//					fTest << fontSize << " " << rowLength << endl;
+	//					fTest << figure->GetContent() << endl;
+	//				}
+	//				else if (dynamic_cast<MemoLine*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 8 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Generalization*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 9 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Realization*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 10 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Dependency*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 11 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Association*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 12 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<DirectedAssociation*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 13 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Aggregation*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 14 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Aggregations*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 15 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
 
-					else if (dynamic_cast<Composition*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 16 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<Compositions*>(object->GetAt(j))) {
-						Relation *relation = static_cast<Relation*>(object->GetAt(j));
-						fTest << relation->GetX() << " " << relation->GetY() << " " <<
-							relation->GetWidth() << " " << relation->GetHeight() << " " << 17 << endl;
-						fTest << relation->GetLength() << endl;
-						while (k < relation->GetLength()) {
-							cPoint = relation->GetAt(k);
-							fTest << cPoint.x << " " << cPoint.y << endl;
-							k++;
-						}
-						while (l < 5) {
-							fTest << relation->rollNames->GetAt(l) << endl;;
-							fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
+	//				else if (dynamic_cast<Composition*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 16 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<Compositions*>(object->GetAt(j))) {
+	//					Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//					fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//						relation->GetWidth() << " " << relation->GetHeight() << " " << 17 << endl;
+	//					fTest << relation->GetLength() << endl;
+	//					while (k < relation->GetLength()) {
+	//						cPoint = relation->GetAt(k);
+	//						fTest << cPoint.x << " " << cPoint.y << endl;
+	//						k++;
+	//					}
+	//					while (l < 5) {
+	//						fTest << relation->rollNames->GetAt(l) << endl;;
+	//						fTest << relation->rollNamePoints->GetAt(l).x << " " << relation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
 
-					else if (dynamic_cast<SelfGeneralization*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 18 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<SelfDependency*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 19 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
+	//				else if (dynamic_cast<SelfGeneralization*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 18 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<SelfDependency*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 19 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
 
-					}
-					else if (dynamic_cast<SelfAssociation*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 20 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<SelfDirectedAssociation*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 21 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<SelfAggregation*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 22 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					else if (dynamic_cast<SelfAggregations*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 23 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						};
+	//				}
+	//				else if (dynamic_cast<SelfAssociation*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 20 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<SelfDirectedAssociation*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 21 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<SelfAggregation*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 22 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				else if (dynamic_cast<SelfAggregations*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 23 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					};
 
-					}
-					else if (dynamic_cast<SelfComposition*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 24 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
+	//				}
+	//				else if (dynamic_cast<SelfComposition*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 24 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
 
-					}
-					else if (dynamic_cast<SelfCompositions*>(object->GetAt(j))) {
-						selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
-						fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 25 << endl;
-						while (l < 5) {
-							fTest << selfRelation->rollNames->GetAt(l) << endl;;
-							fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
-							l++;
-						}
-					}
-					j++;
-				}
-			}
-			else if (dynamic_cast<MemoBox*>(this->diagram->GetAt(i))) {
-				object = static_cast<FigureComposite*>(this->diagram->GetAt(i));
-				fontSize = object->GetFontSize();
-				rowLength = object->GetRowCount(object->GetContent());
-				fTest << object->GetLength() << " " << object->GetX() << " " << object->GetY()
-					<< " " << object->GetWidth() << " " << object->GetHeight() << " " << 7 << endl;;
-				fTest << fontSize << " " << rowLength << endl;
-				fTest << object->GetContent() << endl;
-				while (j < object->GetLength()) {
-					Relation *relation = static_cast<Relation*>(object->GetAt(j));
-					fTest << relation->GetX() << " " << relation->GetY() << " " <<
-						relation->GetWidth() << " " << relation->GetHeight() << " " << 8 << endl;
-					fTest << relation->GetLength() << endl;
+	//				}
+	//				else if (dynamic_cast<SelfCompositions*>(object->GetAt(j))) {
+	//					selfRelation = static_cast<SelfRelation*>(object->GetAt(j));
+	//					fTest << selfRelation->GetX() << " " << selfRelation->GetY() << " " << selfRelation->GetWidth() << " " << selfRelation->GetHeight() << " " << 25 << endl;
+	//					while (l < 5) {
+	//						fTest << selfRelation->rollNames->GetAt(l) << endl;;
+	//						fTest << selfRelation->rollNamePoints->GetAt(l).x << " " << selfRelation->rollNamePoints->GetAt(l).y << endl;
+	//						l++;
+	//					}
+	//				}
+	//				j++;
+	//			}
+	//		}
+	//		else if (dynamic_cast<MemoBox*>(this->diagram->GetAt(i))) {
+	//			object = static_cast<FigureComposite*>(this->diagram->GetAt(i));
+	//			fontSize = object->GetFontSize();
+	//			rowLength = object->GetRowCount(object->GetContent());
+	//			fTest << object->GetLength() << " " << object->GetX() << " " << object->GetY()
+	//				<< " " << object->GetWidth() << " " << object->GetHeight() << " " << 7 << endl;;
+	//			fTest << fontSize << " " << rowLength << endl;
+	//			fTest << object->GetContent() << endl;
+	//			while (j < object->GetLength()) {
+	//				Relation *relation = static_cast<Relation*>(object->GetAt(j));
+	//				fTest << relation->GetX() << " " << relation->GetY() << " " <<
+	//					relation->GetWidth() << " " << relation->GetHeight() << " " << 8 << endl;
+	//				fTest << relation->GetLength() << endl;
 
-					while (k < relation->GetLength()) {
-						cPoint = relation->GetAt(k);
-						fTest << cPoint.x << " " << cPoint.y << endl;
-						k++;
-					}
-					j++;
-				}
-			}
-			i++;
-		}
-		fTest.close();
-	}
-	if (this->historyGraphic->undoGraphicArray->GetLength() != 0) {
-		this->historyGraphic->undoGraphicArray->Clear();
-		this->historyGraphic->redoGraphicArray->Clear();
-	}
+	//				while (k < relation->GetLength()) {
+	//					cPoint = relation->GetAt(k);
+	//					fTest << cPoint.x << " " << cPoint.y << endl;
+	//					k++;
+	//				}
+	//				j++;
+	//			}
+	//		}
+	//		i++;
+	//	}
+	//	fTest.close();
+	//}
+	//if (this->historyGraphic->undoGraphicArray->GetLength() != 0) {
+	//	this->historyGraphic->undoGraphicArray->Clear();
+	//	this->historyGraphic->redoGraphicArray->Clear();
+	//}
 
 	return this->diagram->GetLength();
 }
@@ -624,6 +625,8 @@ int ClassDiagramForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->historyGraphic = new HistoryGraphic;
 	this->keyBoard = new KeyBoard;
 	this->scroll = new Scroll;
+
+	FontSet fontSet(&this->lf); // Set Default LOGFONT Structure
 
 	CRect rect;
 	this->GetClientRect(&rect);
@@ -672,11 +675,6 @@ void ClassDiagramForm::OnPaint() {
 	bitmap.CreateCompatibleBitmap(&dc, 4000, 2000);
 	pOldBitmap = memDC.SelectObject(&bitmap);
 	memDC.FillSolidRect(CRect(0, 0, 4000, 2000), RGB(255, 255, 255));
-	CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-	cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-	SetFont(&cFont, TRUE);
-	CFont *oldFont = memDC.SelectObject(&cFont);
 
 	//memDC.SetMapMode(MM_ISOTROPIC);
 	//memDC.SetWindowExt(100, 100);
@@ -705,6 +703,10 @@ void ClassDiagramForm::OnPaint() {
 	dc.SetViewportExt(this->zoomRate, this->zoomRate);
 
 	dc.BitBlt(0, 0, rect.right * 100 / this->zoomRate, rect.bottom * 100 / this->zoomRate, &memDC, horzCurPos, vertCurPos, SRCCOPY);
+
+	memDC.SelectObject(pOldBitmap);
+	bitmap.DeleteObject();
+	memDC.DeleteDC();
 }
 
 void ClassDiagramForm::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
@@ -725,18 +727,11 @@ void ClassDiagramForm::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		}
 
 		CClientDC dc(this);
-		CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-		cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-		SetFont(&cFont, TRUE);
-		CFont *oldFont = dc.SelectObject(&cFont);
 		KeyAction *keyAction = this->keyBoard->KeyDown(this, nChar, nRepCnt, nFlags);
 		if (keyAction != 0) {
 			keyAction->KeyPress(this, &dc);
 			Invalidate(false);
 		}
-		dc.SelectObject(oldFont);
-		cFont.DeleteObject();
 	}
 }
 
@@ -889,7 +884,7 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 		Figure* figure = this->diagram->FindItem(startX, startY);
 		if (figure != NULL && this->selection->GetLength() != 0) {
 
-			this->textEdit = new TextEdit(this, figure);
+			this->textEdit = new TextEdit(this, figure, this->lf);
 
 			if (dynamic_cast<MemoBox*>(figure) || dynamic_cast<ClassName*>(figure)) {
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
@@ -943,7 +938,8 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 				i++;
 			}
 			if (index > 0) {
-				this->textEdit = new TextEdit(this, relation, i - 1);
+				FontSet fontSet;
+				this->textEdit = new TextEdit(this, relation, fontSet.RelationFontSet(), i - 1);
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
 					left + 1 - horzCurPos,
 					top + 1 - vertCurPos,
@@ -1000,7 +996,8 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 			// 확인해서 있으면 그 index 기억해두고 그 박스 사이즈로 textEdit 연다 (textEdit 생성자 따로 만들어야할듯)
 
 			if (index > 0) {
-				this->textEdit = new TextEdit(this, selfRelation, i - 1);
+				FontSet fontSet;
+				this->textEdit = new TextEdit(this, selfRelation, fontSet.RelationFontSet(), i - 1);
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
 					left + 1 - horzCurPos,
 					top + 1 - vertCurPos,

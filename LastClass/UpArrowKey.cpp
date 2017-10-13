@@ -20,6 +20,7 @@ UpArrowKey::~UpArrowKey() {
 
 void UpArrowKey::KeyPress(TextEdit *textEdit) {
 	CClientDC dc(textEdit);
+	dc.SelectObject(&textEdit->cFont);
 	if (GetKeyState(VK_SHIFT) >= 0) {
 		if (textEdit->flagSelection == 1) {
 			textEdit->flagSelection = 0;
@@ -32,11 +33,6 @@ void UpArrowKey::KeyPress(TextEdit *textEdit) {
 			textEdit->selectedY = textEdit->caret->GetRowIndex();
 		}
 	}
-	CFont cFont;
-	cFont.CreateFontIndirect(&textEdit->lf);
-	textEdit->p_oldFont = dc.SelectObject(&cFont);
-
-	CFont *oldFont = dc.SelectObject(&cFont); // 폰트 시작
 
 	Long x = textEdit->caret->GetCurrentCaretX();
 	Long y = textEdit->caret->GetCurrentCaretY();
@@ -50,8 +46,6 @@ void UpArrowKey::KeyPress(TextEdit *textEdit) {
 		previousRowIndex > 0) {
 		textEdit->caret->SetCharacterIndex(textEdit->text->GetAt(textEdit->caret->GetRowIndex())->GetLength());
 	}
-	dc.SelectObject(textEdit->p_oldFont);
-	cFont.DeleteObject(); // 폰트
 }
 
 void UpArrowKey::KeyPress(ClassDiagramForm *classDiagramForm, CDC *cdc) {

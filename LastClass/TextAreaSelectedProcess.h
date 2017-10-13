@@ -17,7 +17,7 @@ public:
 
 public:
 	void GetRange(TextEdit* textEdit);
-	void SingleLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt);
+	void SingleLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, CRect *rt);
 	void FirstMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt);
 	void MiddleMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt);
 	void EndMultiLineSelected(TextEdit *textEdit, CDC *pDC, CString *cstr, RECT *rt);

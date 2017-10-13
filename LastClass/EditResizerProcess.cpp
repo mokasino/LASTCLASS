@@ -40,12 +40,12 @@ void EditResizerProcess::ResizeEditHeight(TextEdit *textEdit, CDC *cdc) {
 	RECT rt;
 	textEdit->GetClientRect(&rt);
 	textEdit->SetWindowPos(&textEdit->wndTopMost, 0, 0,
-		rt.right, textEdit->GetRowHeight()*textEdit->text->GetLength(), SWP_NOMOVE | SWP_NOZORDER | SWP_NOREDRAW | SWP_NOCOPYBITS);
+		rt.right, textEdit->lf.lfHeight*textEdit->text->GetLength(), SWP_NOMOVE | SWP_NOZORDER | SWP_NOREDRAW | SWP_NOCOPYBITS);
 }
 
 void EditResizerProcess::ResizeEditAll(TextEdit *textEdit, CDC *cdc) {
 	textEdit->SetWindowPos(&textEdit->wndTopMost, 0, 0,
-		textEdit->text->MaxWidth(cdc) + CaretWidth, textEdit->GetRowHeight()*textEdit->text->GetLength() , SWP_NOMOVE | SWP_NOZORDER | SWP_NOREDRAW | SWP_NOCOPYBITS);
+		textEdit->text->MaxWidth(cdc) + CaretWidth, textEdit->lf.lfHeight*textEdit->text->GetLength() , SWP_NOMOVE | SWP_NOZORDER | SWP_NOREDRAW | SWP_NOCOPYBITS);
 }
 
 void EditResizerProcess::RewindEdit(TextEdit *textEdit, CDC *cdc) {
@@ -147,8 +147,6 @@ void EditResizerProcess::ResizeClassHeight(TextEdit *textEdit) {
 void EditResizerProcess::ResizeEditWidthToLeft(TextEdit *textEdit, CDC *cdc) {
 	RECT rt;
 	textEdit->GetClientRect(&rt); //최대화 상태에서만 정상적인 rect를 출력. 최소화X
-	
-
 	
 	int vertCurPos = textEdit->GetParent()->GetScrollPos(SB_VERT);
 	int horzCurPos = textEdit->GetParent()->GetScrollPos(SB_HORZ);

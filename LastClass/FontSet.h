@@ -17,11 +17,15 @@ public:
 	FontSet();
 	FontSet(LOGFONT *lf);
 	FontSet(const FontSet& source);
+	CFont* SetFont(const LOGFONT& lf, CDC *pDC);
+	void ApplyFont(TextEdit *textEdit);
 	~FontSet();
 
 	LOGFONT& RelationFontSet();
+	CFont cFont;
 private:
 	LOGFONT lf;
+	CFont *p_oldFont;
 };
 
 #endif // _FONTSET_H

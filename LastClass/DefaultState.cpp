@@ -80,7 +80,7 @@ void DefaultState::MouseLButtonDown(MouseLButton *mouseLButton, Diagram *diagram
 	if (object == 57) { //9
 		this->ChangeState(mouseLButton, DrawingComposition::Instance(), 57);
 	}
-	if (object == 87) {
+	if (object == 87) { //W
 		this->ChangeState(mouseLButton, DrawingMemoLine::Instance(), 87);
 	}
 	if (object == 0) {

@@ -29,6 +29,7 @@ FontSet::FontSet(LOGFONT *lf) { // ClassDiagramForm->OnCreate
 }
 
 FontSet::FontSet(const FontSet& source) {
+	this->lf = source.lf;
 }
 
 LOGFONT& FontSet::RelationFontSet() {
@@ -51,5 +52,21 @@ LOGFONT& FontSet::RelationFontSet() {
 	return lf;
 }
 
+CFont* FontSet::SetFont(const LOGFONT& lf, CDC *pDC) {
+	this->cFont.CreateFontIndirect(&lf);
+	return pDC->SelectObject(&this->cFont);
+}
+
+void FontSet::ApplyFont(TextEdit *textEdit) {
+	CDC *pDC = textEdit->GetDC();
+	this->p_oldFont = pDC->SelectObject(&textEdit->cFont);
+	pDC->SelectObject(this->p_oldFont);
+	textEdit->cFont.DeleteObject();
+	textEdit->cFont.CreateFontIndirect(&textEdit->lf);
+	pDC->SelectObject(&textEdit->cFont);
+	textEdit->ReleaseDC(pDC);
+}
+
 FontSet::~FontSet() {
+	this->cFont.DeleteObject();
 }

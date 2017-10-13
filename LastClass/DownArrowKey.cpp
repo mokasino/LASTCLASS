@@ -20,6 +20,8 @@ DownArrowKey::~DownArrowKey() {
 
 void DownArrowKey::KeyPress(TextEdit *textEdit) {
 	CClientDC dc(textEdit);
+	dc.SelectObject(&textEdit->cFont);
+
 	if (GetKeyState(VK_SHIFT) >= 0) {
 		if (textEdit->flagSelection == 1) {
 			textEdit->flagSelection = 0;
@@ -32,10 +34,6 @@ void DownArrowKey::KeyPress(TextEdit *textEdit) {
 			textEdit->selectedY = textEdit->caret->GetRowIndex();
 		}
 	}
-	
-	CFont cFont;
-	cFont.CreateFontIndirect(&textEdit->lf);
-	textEdit->p_oldFont = dc.SelectObject(&cFont);
 
 	Long x = textEdit->caret->GetCurrentCaretX();
 	Long y = textEdit->caret->GetCurrentCaretY();
@@ -49,8 +47,6 @@ void DownArrowKey::KeyPress(TextEdit *textEdit) {
 		previousRowIndex < textEdit->text->GetLength()) {
 		textEdit->caret->SetCharacterIndex(textEdit->text->GetAt(textEdit->caret->GetRowIndex())->GetLength());
 	}
-	dc.SelectObject(textEdit->p_oldFont);
-	cFont.DeleteObject();
 }
 
 void DownArrowKey::KeyPress(ClassDiagramForm *classDiagramForm, CDC *cdc) {

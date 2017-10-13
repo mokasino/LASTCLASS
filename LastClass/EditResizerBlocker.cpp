@@ -42,8 +42,8 @@ void EditResizerBlocker::Block(TextEdit *textEdit, CDC *pDC) {
 			if (textEdit->text->MaxWidth(pDC) + CaretWidth > editRect.right) {
 				rt.right += textEdit->text->MaxWidth(pDC) + CaretWidth - editRect.right;
 			}
-			if (textEdit->GetRowHeight() * textEdit->text->GetLength() > editRect.bottom) {
-				rt.bottom += textEdit->GetRowHeight() * textEdit->text->GetLength() - editRect.bottom;
+			if (textEdit->lf.lfHeight * textEdit->text->GetLength() > editRect.bottom) {
+				rt.bottom += textEdit->lf.lfHeight * textEdit->text->GetLength() - editRect.bottom;
 			}
 			if (!((ClassDiagramForm*)(textEdit->GetParent()))->diagram->CheckOverlap(rt, object)) {
 				progress = true;
