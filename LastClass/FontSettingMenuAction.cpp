@@ -10,5 +10,4 @@ FontSettingMenuAction::~FontSettingMenuAction() {
 void FontSettingMenuAction::MenuPress(LastClass* lastClass) {
 	CFontDialog fontDialog;
 	fontDialog.DoModal();
-
 }

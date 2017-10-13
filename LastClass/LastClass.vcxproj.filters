@@ -1298,9 +1298,7 @@
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClCompile>
     <ClCompile Include="PrintPreviewState.cpp" />
-    <ClCompile Include="FontSettingMenuAction.cpp">
-      <Filter>ClassDiagram</Filter>
-    </ClCompile>
+    <ClCompile Include="FontSettingMenuAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LastClass.rc">
