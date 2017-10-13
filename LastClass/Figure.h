@@ -14,6 +14,7 @@ public:
 	Figure();
 	Figure(Long x, Long y, Long width, Long height);
 	Figure(Long x, Long y, Long width, Long height, string content);
+	Figure(Long x, Long y, Long width, Long height, Long minimumWidth, Long minimumHeight, string content);
 	Figure(const Figure& source);
 	Figure& operator = (const Figure& source);
 	virtual ~Figure() = 0;

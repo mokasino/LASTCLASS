@@ -369,6 +369,7 @@ void TextEdit::OnKillFocus(CWnd *pNewWnd) {
 		delete this->textAreaSelected;
 	}
 	if (this != NULL) {
+		classDiagramForm->textEdit = NULL;
 		delete this;
 	}
 }
@@ -411,6 +412,7 @@ void TextEdit::OnClose() {
 		delete this->textAreaSelected;
 	}
 	if (this != NULL) {
+		this->classDiagramForm->textEdit = NULL;
 		delete this;
 	}
 }

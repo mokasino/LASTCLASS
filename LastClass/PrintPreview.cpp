@@ -6,23 +6,18 @@
 #include "DrawingVisitor.h"
 #include "WritingVisitor.h"
 #include "Diagram.h"
-#include "PrintPreviewState.h"
-#include "ToolBar.h"
 
 #include "PrintPreviewButton.h"
 #include "PrintPreviewButtonAction.h"
 
-#include <afxwin.h>
-#include <afxdlgs.h>
-#include <afxpriv.h>
-using namespace std;
+//#include <afxwin.h>
+//#include <afxdlgs.h>
 
 BEGIN_MESSAGE_MAP(PrintPreview, CWnd)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
-	//ON_WM_VSCROLL()
 	ON_WM_MOUSEWHEEL()
 	ON_WM_CLOSE()
 	ON_COMMAND_RANGE(1, 5, OnCommandButton)
@@ -258,21 +253,28 @@ void PrintPreview::OnClose() {
 	this->lastClass->EnableWindow(true);
 	if (this->nextButton != 0) {
 		delete this->nextButton;
+		this->nextButton = NULL;
 	}
 	if (this->printButton != 0) {
 		delete this->printButton;
+		this->printButton = NULL;
 	}
 	if (this->previousButton != 0) {
 		delete this->previousButton;
+		this->previousButton = NULL;
 	}
 	if (this->printZoomIn != 0) {
 		delete this->printZoomIn;
+		this->printZoomIn = NULL;
 	}
 	if (this->printZoomOut != 0) {
 		delete this->printZoomOut;
+		this->printZoomOut = NULL;
 	}
-	if (this != 0) {
+	if (this->lastClass->printPreview != NULL) {
 		this->lastClass->printPreview = NULL;
+	}
+	if (this != NULL) {
 		delete this;
 	}
 }
@@ -285,24 +287,28 @@ void PrintPreview::OnEndPrinting(CDC *pDc, CPrintInfo *pInfo) {
 	this->lastClass->EnableWindow(true);
 	if (this->nextButton != 0) {
 		delete this->nextButton;
-	}
-	if (this->printPreviewButton != 0) {
-		delete this->printPreviewButton;
+		this->nextButton = NULL;
 	}
 	if (this->printButton != 0) {
 		delete this->printButton;
+		this->printButton = NULL;
 	}
 	if (this->previousButton != 0) {
 		delete this->previousButton;
+		this->previousButton = NULL;
 	}
 	if (this->printZoomIn != 0) {
 		delete this->printZoomIn;
+		this->printZoomIn = NULL;
 	}
 	if (this->printZoomOut != 0) {
 		delete this->printZoomOut;
+		this->printZoomOut = NULL;
 	}
-	if (this != 0) {
+	if (this->lastClass->printPreview != NULL) {
 		this->lastClass->printPreview = NULL;
+	}
+	if (this != NULL) {
 		delete this;
 	}
 }
