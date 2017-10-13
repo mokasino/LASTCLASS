@@ -47,6 +47,7 @@
 #include "MenuAction.h"
 #include "Scroll.h"
 #include "ScrollAction.h"
+#include "FontSet.h"
 
 #include <math.h>
 #include <iostream>
@@ -54,6 +55,8 @@
 #include <afxmsg_.h>
 #include <afxext.h>
 #include <afxdlgs.h>
+
+#pragma warning(disable:4996)
 
 using namespace std;
 
@@ -144,9 +147,25 @@ Long ClassDiagramForm::Load() {
 			FigureComposite *figureComposite = static_cast<FigureComposite*>(this->diagram->GetAt(position));
 			if (type == 7) {   //메모박스이면
 				getline(fTest, temp1);
-				sscanf_s((CString)temp1.c_str(), "%d %d",&fontSize, &rowLength);
-				j = 0;
+				strcpy(this->lf.lfFaceName, temp1.c_str());
+				temp1.clear();
+				getline(fTest, temp1);
+				sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d",
+					&this->lf.lfHeight,
+					&this->lf.lfWidth,
+					&this->lf.lfEscapement,
+					&this->lf.lfOrientation,
+					&this->lf.lfWeight,
+					&this->lf.lfItalic,
+					&this->lf.lfUnderline,
+					&this->lf.lfStrikeOut,
+					&this->lf.lfCharSet,
+					&this->lf.lfOutPrecision,
+					&this->lf.lfClipPrecision,
+					&this->lf.lfQuality,
+					&this->lf.lfPitchAndFamily, &rowLength);
 				temp2.clear();
+				j = 0;
 				while (j < rowLength) {
 					getline(fTest, temp1);
 					temp2.append(temp1);
@@ -155,7 +174,7 @@ Long ClassDiagramForm::Load() {
 				}
 					Long k = temp2.find_last_of('\n');
 					temp2.replace(k, 1, "\0");
-					figureComposite->ReplaceString(temp2, fontSize);
+					figureComposite->ReplaceString(temp2, this->lf);
 			
 			}
 			i = 0;
@@ -166,7 +185,23 @@ Long ClassDiagramForm::Load() {
 			
 				if (type < 7 && type != 2) {
 					getline(fTest, temp1);
-					sscanf_s((CString)temp1.c_str(), "%d %d", &fontSize, &rowLength);
+					strcpy(this->lf.lfFaceName, temp1.c_str());
+					temp1.clear();
+					getline(fTest, temp1);
+					sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d",
+						&this->lf.lfHeight,
+						&this->lf.lfWidth,
+						&this->lf.lfEscapement,
+						&this->lf.lfOrientation,
+						&this->lf.lfWeight,
+						&this->lf.lfItalic,
+						&this->lf.lfUnderline,
+						&this->lf.lfStrikeOut,
+						&this->lf.lfCharSet,
+						&this->lf.lfOutPrecision,
+						&this->lf.lfClipPrecision,
+						&this->lf.lfQuality,
+						&this->lf.lfPitchAndFamily, &rowLength);
 					temp2.clear();
 					j = 0;
 					while (j < rowLength) {
@@ -177,7 +212,7 @@ Long ClassDiagramForm::Load() {
 					}
 						Long k = temp2.find_last_of('\n');
 						temp2.replace(k, 1, "\0");
-						figure->ReplaceString(temp2, fontSize);
+						figure->ReplaceString(temp2, this->lf);
 						if (type == 3) {
 							static_cast<Class*>(figureComposite)->Add(static_cast<Attribute*>(figure));
 						}
@@ -302,11 +337,24 @@ Long ClassDiagramForm::Save() {
 					l = 0;
 					if (dynamic_cast<ClassName*>(object->GetAt(j))) {
 						figure = static_cast<ClassName*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
 						rowLength = figure->GetRowCount(figure->GetContent());
 						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
 							<< figure->GetHeight() << " " << figure->GetMinimumWidth() << " " << figure->GetMinimumHeight() << " " << 1 << endl;
-						fTest << fontSize << " " << rowLength << endl;
+						fTest << figure->lf.lfFaceName << endl;		// 글꼴
+						fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+							figure->lf.lfWidth << " " << 			// 글꼴의 너비
+							figure->lf.lfEscapement << " " << 		// 방향
+							figure->lf.lfOrientation << " " << 		// 회전각도
+							figure->lf.lfWeight << " " << 			// 굵기
+							figure->lf.lfItalic << " " << 			// 기울임꼴
+							figure->lf.lfUnderline << " " << 		// 밑줄
+							figure->lf.lfStrikeOut << " " << 		// 취소선
+							figure->lf.lfCharSet << " " <<			// 문자 셋트
+							figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+							figure->lf.lfQuality << " " << 			// 출력의 질
+							figure->lf.lfPitchAndFamily << " " << 	// 자간
+							rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Line*>(object->GetAt(j))) {
@@ -316,38 +364,93 @@ Long ClassDiagramForm::Save() {
 					}
 					else if (dynamic_cast<Attribute*>(object->GetAt(j))) {
 						figure = static_cast<Attribute*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
 						rowLength = figure->GetRowCount(figure->GetContent());
 						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
 							<< figure->GetHeight() << " " << figure->GetMinimumWidth() << " " << figure->GetMinimumHeight() << " " << 3 << endl;
-						fTest << fontSize << " " << rowLength << endl;
+						fTest << figure->lf.lfFaceName << endl;		// 글꼴
+						fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+							figure->lf.lfWidth << " " << 			// 글꼴의 너비
+							figure->lf.lfEscapement << " " << 		// 방향
+							figure->lf.lfOrientation << " " << 		// 회전각도
+							figure->lf.lfWeight << " " << 			// 굵기
+							figure->lf.lfItalic << " " << 			// 기울임꼴
+							figure->lf.lfUnderline << " " << 		// 밑줄
+							figure->lf.lfStrikeOut << " " << 		// 취소선
+							figure->lf.lfCharSet << " " <<			// 문자 셋트
+							figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+							figure->lf.lfQuality << " " << 			// 출력의 질
+							figure->lf.lfPitchAndFamily << " " << 	// 자간
+							rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Method*>(object->GetAt(j))) {
 						figure = static_cast<Method*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
 						rowLength = figure->GetRowCount(figure->GetContent());
 						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
 							<< figure->GetHeight() << " " << figure->GetMinimumWidth() << " " << figure->GetMinimumHeight() << " " << 4 << endl;
-						fTest << fontSize << " " << rowLength << endl;
+						fTest << figure->lf.lfFaceName << endl;		// 글꼴
+						fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+							figure->lf.lfWidth << " " << 			// 글꼴의 너비
+							figure->lf.lfEscapement << " " << 		// 방향
+							figure->lf.lfOrientation << " " << 		// 회전각도
+							figure->lf.lfWeight << " " << 			// 굵기
+							figure->lf.lfItalic << " " << 			// 기울임꼴
+							figure->lf.lfUnderline << " " << 		// 밑줄
+							figure->lf.lfStrikeOut << " " << 		// 취소선
+							figure->lf.lfCharSet << " " <<			// 문자 셋트
+							figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+							figure->lf.lfQuality << " " << 			// 출력의 질
+							figure->lf.lfPitchAndFamily << " " << 	// 자간
+							rowLength << endl;
+						fTest << figure->GetContent() << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Reception*>(object->GetAt(j))) {
 						figure = static_cast<Reception*>(object->GetAt(j));
-						fontSize = figure->GetFontSize();
 						rowLength = figure->GetRowCount(figure->GetContent());
 						fTest << figure->GetX() << " " << figure->GetY() << " " << figure->GetWidth() << " "
 							<< figure->GetHeight() << " " << figure->GetMinimumWidth() << " " << figure->GetMinimumHeight() << " " << 5 << endl;
-						fTest << fontSize << " " << rowLength << endl;
+						fTest << figure->lf.lfFaceName << endl;		// 글꼴
+						fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+							figure->lf.lfWidth << " " << 			// 글꼴의 너비
+							figure->lf.lfEscapement << " " << 		// 방향
+							figure->lf.lfOrientation << " " << 		// 회전각도
+							figure->lf.lfWeight << " " << 			// 굵기
+							figure->lf.lfItalic << " " << 			// 기울임꼴
+							figure->lf.lfUnderline << " " << 		// 밑줄
+							figure->lf.lfStrikeOut << " " << 		// 취소선
+							figure->lf.lfCharSet << " " <<			// 문자 셋트
+							figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+							figure->lf.lfQuality << " " << 			// 출력의 질
+							figure->lf.lfPitchAndFamily << " " << 	// 자간
+							rowLength << endl;
+						fTest << figure->GetContent() << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Template*>(object->GetAt(j))) {
 						figure = object->GetAt(j);
-						fontSize = figure->GetFontSize();
 						rowLength = figure->GetRowCount(figure->GetContent());
 						fTest << figure->GetX() << " " << figure->GetY() << " " <<
 							figure->GetWidth() << " " << figure->GetHeight() << " " << figure->GetMinimumWidth() << " " << figure->GetMinimumHeight() << " " << 6 << endl;
-						fTest << fontSize << " " << rowLength << endl;
+						fTest << figure->lf.lfFaceName << endl;		// 글꼴
+						fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+							figure->lf.lfWidth << " " << 			// 글꼴의 너비
+							figure->lf.lfEscapement << " " << 		// 방향
+							figure->lf.lfOrientation << " " << 		// 회전각도
+							figure->lf.lfWeight << " " << 			// 굵기
+							figure->lf.lfItalic << " " << 			// 기울임꼴
+							figure->lf.lfUnderline << " " << 		// 밑줄
+							figure->lf.lfStrikeOut << " " << 		// 취소선
+							figure->lf.lfCharSet << " " <<			// 문자 셋트
+							figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+							figure->lf.lfQuality << " " << 			// 출력의 질
+							figure->lf.lfPitchAndFamily << " " << 	// 자간
+							rowLength << endl;
+						fTest << figure->GetContent() << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<MemoLine*>(object->GetAt(j))) {
@@ -595,11 +698,25 @@ Long ClassDiagramForm::Save() {
 			}
 			else if (dynamic_cast<MemoBox*>(this->diagram->GetAt(i))) {
 				object = static_cast<FigureComposite*>(this->diagram->GetAt(i));
-				fontSize = object->GetFontSize();
 				rowLength = object->GetRowCount(object->GetContent());
 				fTest << object->GetLength() << " " << object->GetX() << " " << object->GetY()
 					<< " " << object->GetWidth() << " " << object->GetHeight() << " " << object->GetMinimumWidth() << " " << object->GetMinimumHeight() << " " << 7 << endl;;
-				fTest << fontSize << " " << rowLength << endl;
+				fTest << figure->lf.lfFaceName << endl;		// 글꼴
+				fTest << figure->lf.lfHeight << " " << 		// 글꼴의 높이
+					figure->lf.lfWidth << " " << 			// 글꼴의 너비
+					figure->lf.lfEscapement << " " << 		// 방향
+					figure->lf.lfOrientation << " " << 		// 회전각도
+					figure->lf.lfWeight << " " << 			// 굵기
+					figure->lf.lfItalic << " " << 			// 기울임꼴
+					figure->lf.lfUnderline << " " << 		// 밑줄
+					figure->lf.lfStrikeOut << " " << 		// 취소선
+					figure->lf.lfCharSet << " " <<			// 문자 셋트
+					figure->lf.lfOutPrecision << " " << 	// 출력 정확도
+					figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도
+					figure->lf.lfQuality << " " << 			// 출력의 질
+					figure->lf.lfPitchAndFamily << " " << 	// 자간
+					rowLength << endl;
+				fTest << figure->GetContent() << endl;
 				fTest << object->GetContent() << endl;
 				while (j < object->GetLength()) {
 					Relation *relation = static_cast<Relation*>(object->GetAt(j));
@@ -639,6 +756,7 @@ int ClassDiagramForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->keyBoard = new KeyBoard;
 	this->scroll = new Scroll;
 	this->classDiagramFormMenu = new ClassDiagramFormMenu(this);
+
 	CRect rect;
 	this->GetClientRect(&rect);
 	ModifyStyle(0, WS_CLIPCHILDREN);
@@ -670,6 +788,9 @@ int ClassDiagramForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	}
 	//1.2. 적재한다
 	//this->Load();
+
+	FontSet fontSet(&this->lf); // Set Default LOGFONT Structure
+
 	//1.3. 윈도우를 갱신한다
 	//Invalidate();
 
@@ -688,18 +809,13 @@ void ClassDiagramForm::OnPaint() {
 	bitmap.CreateCompatibleBitmap(&dc, 4000, 2000);
 	pOldBitmap = memDC.SelectObject(&bitmap);
 	memDC.FillSolidRect(CRect(0, 0, 4000, 2000), RGB(255, 255, 255));
-	CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-	cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-	SetFont(&cFont, TRUE);
-	CFont *oldFont = memDC.SelectObject(&cFont);
 
 	//memDC.SetMapMode(MM_ISOTROPIC);
 	//memDC.SetWindowExt(100, 100);
 	//memDC.SetViewportExt(this->zoomRate, this->zoomRate);
 	if (this->zoomRate != 100) {
 		CRect rectTemp = { 0, 0, 4000, 2000 };
-		dc.FillSolidRect(rectTemp, RGB(255, 255, 255));
+		//dc.FillSolidRect(rectTemp, RGB(255, 255, 255));
 	}
 
 	DrawingVisitor drawingVisitor;
@@ -724,6 +840,7 @@ void ClassDiagramForm::OnPaint() {
 }
 
 void ClassDiagramForm::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
+	CClientDC dc(this);
 	if (this->zoomRate == 100) {
 		if (nChar == 0 || nChar == 49 || nChar == 81 || nChar == 50 || nChar == 55 || nChar == 56 || nChar == 53 ||
 			nChar == 57 || nChar == 48 || nChar == 52 || nChar == 54 || nChar == 87 || nChar == 51) {
@@ -740,19 +857,11 @@ void ClassDiagramForm::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 			this->lastClass->statusBar->MakeStatusBar(this->lastClass, this->lastClass->GetSafeHwnd(), 0, 0, 5);
 		}
 
-		CClientDC dc(this);
-		CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-		cFont.CreateFont(25, 0, 0, 0, FW_BOLD, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
-			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "맑은 고딕");
-		SetFont(&cFont, TRUE);
-		CFont *oldFont = dc.SelectObject(&cFont);
 		KeyAction *keyAction = this->keyBoard->KeyDown(this, nChar, nRepCnt, nFlags);
 		if (keyAction != 0) {
 			keyAction->KeyPress(this, &dc);
 			Invalidate(false);
 		}
-		dc.SelectObject(oldFont);
-		cFont.DeleteObject();
 	}
 }
 
@@ -990,7 +1099,7 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 		Figure* figure = this->diagram->FindItem(startX, startY);
 		if (figure != NULL && this->selection->GetLength() != 0) {
 
-			this->textEdit = new TextEdit(this, figure);
+			this->textEdit = new TextEdit(this, figure, this->lf);
 
 			if (dynamic_cast<MemoBox*>(figure) || dynamic_cast<ClassName*>(figure)) {
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
@@ -1044,7 +1153,8 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 				i++;
 			}
 			if (index > 0) {
-				this->textEdit = new TextEdit(this, relation, i - 1);
+				FontSet fontSet;
+				this->textEdit = new TextEdit(this, relation, fontSet.RelationFontSet(), i - 1);
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
 					left + 1 - horzCurPos,
 					top + 1 - vertCurPos,
@@ -1101,7 +1211,8 @@ void ClassDiagramForm::OnLButtonDblClk(UINT nFlags, CPoint point) {
 			// 확인해서 있으면 그 index 기억해두고 그 박스 사이즈로 textEdit 연다 (textEdit 생성자 따로 만들어야할듯)
 
 			if (index > 0) {
-				this->textEdit = new TextEdit(this, selfRelation, i - 1);
+				FontSet fontSet;
+				this->textEdit = new TextEdit(this, selfRelation, fontSet.RelationFontSet(), i - 1);
 				this->textEdit->Create(NULL, "textEdit", WS_CHILD | WS_VISIBLE, CRect(
 					left + 1 - horzCurPos,
 					top + 1 - vertCurPos,

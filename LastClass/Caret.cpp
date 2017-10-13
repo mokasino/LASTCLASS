@@ -24,8 +24,8 @@ Caret::~Caret() {
 }
 
 void Caret::MoveToIndex(TextEdit *textEdit, CDC *pDC) {
-	Long pointX = 0;													 //가로
-	Long pointY = this->rowIndex * textEdit->lf.lfHeight;         //세로
+	Long pointX = 0;										//가로
+	Long pointY = this->rowIndex * textEdit->lf.lfHeight;	//세로
 	CString str;
 	Long column = 0;
 	Long tabWidth = 0;

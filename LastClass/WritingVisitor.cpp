@@ -30,9 +30,7 @@ void WritingVisitor::Visit(Text* text, CDC* cPaintDc) {
 	Long textWidth = text->MaxWidth(cPaintDc);
 	cPaintDc->SetBkMode(TRANSPARENT);
 	RECT rt = { 0 , 0, textWidth, text->GetLength() * textHeight };
-	//int tabStop[4] = { 8,16,24,32 };
-	//cPaintDc->TabbedTextOut(0, 0, (CString)text->MakeText().c_str(), 4, tabStop, 0);
-	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, DT_EXPANDTABS | DT_TABSTOP | 0x800);
 }
 
 void  WritingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
@@ -104,7 +102,7 @@ void WritingVisitor::Visit(Template *object, CDC *cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(object->lf, cPaintDc);
 	RECT rt = { object->GetX() + GabX , object->GetY() + GabY, object->GetX() + object->GetWidth() - GabX, object->GetY() + object->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)object->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)object->GetContent().c_str(), &rt, DT_CENTER | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 
@@ -112,7 +110,7 @@ void WritingVisitor::Visit(ClassName* className, CDC* cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(className->lf, cPaintDc);
 	RECT rt = { className->GetX() + GabX , className->GetY() + MemoGab + GabY, className->GetX() + className->GetWidth() - GabX, className->GetY() + className->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)className->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)className->GetContent().c_str(), &rt, DT_CENTER | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 void WritingVisitor::Visit(Attribute* attribute, CDC* cPaintDc) {

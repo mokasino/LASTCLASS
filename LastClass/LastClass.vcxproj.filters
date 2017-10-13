@@ -673,6 +673,8 @@
     <ClInclude Include="GraphicRightArrowKey.h">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClInclude>
+    <ClInclude Include="PrintPreviewState.h" />
+    <ClInclude Include="FontSettingMenuAction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Figure.cpp">
@@ -1294,6 +1296,10 @@
     </ClCompile>
     <ClCompile Include="GraphicUpArrowKey.cpp">
       <Filter>KeyAction\ClassDiagram</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintPreviewState.cpp" />
+    <ClCompile Include="FontSettingMenuAction.cpp">
+      <Filter>ClassDiagram</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

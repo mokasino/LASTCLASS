@@ -121,9 +121,9 @@ KeyAction* KeyBoard::KeyDown(TextEdit *textEdit, UINT nChar, UINT nRepCnt, UINT 
 	case VK_INSERT:
 		this->keyAction = new InsertKey;
 		break;
-	//case VK_TAB:
-		//this->keyAction = new TabKey;
-		//break;
+	case VK_TAB:
+		this->keyAction = new TabKey;
+		break;
 	case VK_ESCAPE:
 		this->keyAction = new EscapeKey;
 		break;

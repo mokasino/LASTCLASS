@@ -44,7 +44,7 @@ Figure::Figure(Long x, Long y, Long width, Long height, Long minimumWidth, Long 
 	this->content = content;
 	this->minimumWidth = minimumWidth;
 	this->minimumHeight = minimumHeight;
-	this->fontSize = 25;
+	this->lf = { 0, };
 }
 
 Figure::Figure(const Figure& source) {

@@ -32,6 +32,7 @@
 #include "DeleteGraphicKeyMenuAction.h"
 #include "AboutMenuAction.h"
 #include "ExitKeyMenuAction.h"
+#include "FontSettingMenuAction.h"
 
 Menu::Menu(LastClass* lastClass) {
 	this->lastClass = lastClass;
@@ -67,6 +68,7 @@ Menu::Menu(LastClass* lastClass) {
 	this->editMenu->AppendMenu(MF_STRING, 109, "자르기(X)");
 	this->editMenu->AppendMenu(MF_STRING, 123, "되돌리기(Z)");
 	this->editMenu->AppendMenu(MF_STRING, 124, "재실행(Y)");
+	this->editMenu->AppendMenu(MF_STRING, 126, "서식");
 	this->drawMenu->AppendMenu(MF_STRING , 110, "클래스 그리기(Q)"); //
 	this->drawMenu->AppendMenu(MF_STRING, 111, "메모박스 그리기(W)"); //
 	this->drawMenu->AppendMenu(MF_POPUP, (UINT_PTR)this->relationMenu->m_hMenu, "관계선 그리기(D)"); // 관계선 안에 관계선 그리기
@@ -130,6 +132,7 @@ MenuAction* Menu::MenuSelected( UINT parm_control_id) {
 	case 123: this->menuAction = new GraphicCtrlUndoMenuAction; break;
 	case 124: this->menuAction = new GraphicCtrlRedoMenuAction; break;
 	case 125: this->menuAction = new AboutMenuAction; break;
+	case 126: this->menuAction = new FontSettingMenuAction; break;
 	default: break;
 	}
 
