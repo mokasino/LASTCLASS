@@ -37,6 +37,7 @@
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="BackSpaceKey.h" />
     <ClInclude Include="Caret.h" />
+    <ClInclude Include="CenterAlignMenuAction.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="ClassDiagramFormMenu.h" />
@@ -73,6 +74,7 @@
     <ClInclude Include="GraphicCtrlPasteMenuAction.h" />
     <ClInclude Include="GraphicCtrlRedoMenuAction.h" />
     <ClInclude Include="GraphicCtrlUndoMenuAction.h" />
+    <ClInclude Include="LeftAlignMenuAction.h" />
     <ClInclude Include="PrintPreviewButton.h" />
     <ClInclude Include="PrintPreviewButtonAction.h" />
     <ClInclude Include="PrintPreviewNextButton.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="Reception.h" />
     <ClInclude Include="Relation.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="RightAlignMenuAction.h" />
     <ClInclude Include="RightArrowKey.h" />
     <ClInclude Include="RollNameBox.h" />
     <ClInclude Include="Row.h" />
@@ -254,6 +257,7 @@
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="BackSpaceKey.cpp" />
     <ClCompile Include="Caret.cpp" />
+    <ClCompile Include="CenterAlignMenuAction.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="ClassDiagramFormMenu.cpp" />
@@ -288,6 +292,7 @@
     <ClCompile Include="GraphicCtrlCutMenuAction.cpp" />
     <ClCompile Include="GraphicCtrlDeleteKey.cpp" />
     <ClCompile Include="GraphicCtrlPasteMenuAction.cpp" />
+    <ClCompile Include="LeftAlignMenuAction.cpp" />
     <ClCompile Include="PrintPreviewButton.cpp" />
     <ClCompile Include="PrintPreviewButtonAction.cpp" />
     <ClCompile Include="PrintPreviewNextButton.cpp" />
@@ -410,6 +415,7 @@
     <ClCompile Include="Realization.cpp" />
     <ClCompile Include="Reception.cpp" />
     <ClCompile Include="Relation.cpp" />
+    <ClCompile Include="RightAlignMenuAction.cpp" />
     <ClCompile Include="RightArrowKey.cpp" />
     <ClCompile Include="RollNameBox.cpp" />
     <ClCompile Include="Row.cpp" />
@@ -452,6 +458,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LastClass.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -28,9 +28,12 @@ void WritingVisitor::Visit(Text* text, CDC* cPaintDc) {
 	pFont->GetLogFont(&lf);
 	Long textHeight = lf.lfHeight;
 	Long textWidth = text->MaxWidth(cPaintDc);
+
+	cPaintDc->SetTextColor(RGB(0, 0, 0));
+	cPaintDc->SetBkColor(RGB(255, 255, 255));
 	cPaintDc->SetBkMode(TRANSPARENT);
 	RECT rt = { 0 , 0, textWidth, text->GetLength() * textHeight };
-	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, DT_EXPANDTABS | DT_TABSTOP | 0x800);
+	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, text->align | DT_EXPANDTABS);
 }
 
 void  WritingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
@@ -93,7 +96,7 @@ void WritingVisitor::Visit(MemoBox *memoBox, CDC *cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(memoBox->lf, cPaintDc);
 	RECT rt = { memoBox->GetX() + GabX , memoBox->GetY() + MemoGab + GabY, memoBox->GetX() + memoBox->GetWidth() - GabX, memoBox->GetY() + memoBox->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)memoBox->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)memoBox->GetContent().c_str(), &rt, memoBox->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 void WritingVisitor::Visit(Selection *selection, CDC *cPaintDc) {
@@ -102,7 +105,7 @@ void WritingVisitor::Visit(Template *object, CDC *cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(object->lf, cPaintDc);
 	RECT rt = { object->GetX() + GabX , object->GetY() + GabY, object->GetX() + object->GetWidth() - GabX, object->GetY() + object->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)object->GetContent().c_str(), &rt, DT_CENTER | DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)object->GetContent().c_str(), &rt, object->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 
@@ -110,28 +113,28 @@ void WritingVisitor::Visit(ClassName* className, CDC* cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(className->lf, cPaintDc);
 	RECT rt = { className->GetX() + GabX , className->GetY() + MemoGab + GabY, className->GetX() + className->GetWidth() - GabX, className->GetY() + className->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)className->GetContent().c_str(), &rt, DT_CENTER | DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)className->GetContent().c_str(), &rt, className->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 void WritingVisitor::Visit(Attribute* attribute, CDC* cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(attribute->lf, cPaintDc);
 	RECT rt = { attribute->GetX() + GabX , attribute->GetY() + GabY, attribute->GetX() + attribute->GetWidth() - GabX, attribute->GetY() + attribute->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)attribute->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)attribute->GetContent().c_str(), &rt, attribute->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 void WritingVisitor::Visit(Method* method, CDC* cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(method->lf, cPaintDc);
 	RECT rt = { method->GetX() + GabX , method->GetY() + GabY, method->GetX() + method->GetWidth() - GabX, method->GetY() + method->GetHeight() - GabY };
-	cPaintDc->DrawText((CString)method->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)method->GetContent().c_str(), &rt, method->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 void WritingVisitor::Visit(Reception* reception, CDC* cPaintDc) {
 	FontSet fontSet;
 	CFont *oldFont = fontSet.SetFont(reception->lf, cPaintDc);
 	RECT rt = { reception->GetX() + GabX , reception->GetY() + GabY, reception->GetX() + reception->GetWidth() - GabX, reception->GetY() + reception->GetHeight() - GabX };
-	cPaintDc->DrawText((CString)reception->GetContent().c_str(), &rt, DT_NOCLIP | DT_EXPANDTABS);
+	cPaintDc->DrawText((CString)reception->GetContent().c_str(), &rt, reception->align | DT_NOCLIP | DT_EXPANDTABS);
 	cPaintDc->SelectObject(oldFont);
 }
 

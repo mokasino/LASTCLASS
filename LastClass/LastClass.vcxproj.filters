@@ -675,6 +675,9 @@
     </ClInclude>
     <ClInclude Include="PrintPreviewState.h" />
     <ClInclude Include="FontSettingMenuAction.h" />
+    <ClInclude Include="LeftAlignMenuAction.h" />
+    <ClInclude Include="RightAlignMenuAction.h" />
+    <ClInclude Include="CenterAlignMenuAction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Figure.cpp">
@@ -1299,10 +1302,18 @@
     </ClCompile>
     <ClCompile Include="PrintPreviewState.cpp" />
     <ClCompile Include="FontSettingMenuAction.cpp" />
+    <ClCompile Include="CenterAlignMenuAction.cpp" />
+    <ClCompile Include="LeftAlignMenuAction.cpp" />
+    <ClCompile Include="RightAlignMenuAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LastClass.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar.bmp">
+      <Filter>Resource</Filter>
+    </Image>
   </ItemGroup>
 </Project>

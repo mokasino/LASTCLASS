@@ -38,6 +38,8 @@ public:
 
 	Long GetWidth() const;
 	Long GetHeight() const;
+public:
+	Long align;
 private:
 	Long width;
 	Long height;

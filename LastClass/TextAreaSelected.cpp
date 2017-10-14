@@ -27,8 +27,8 @@ void TextAreaSelected::SelectTextArea(TextEdit *textEdit, CDC *pDC) {
 	CString TopCstr;
 	CString middleCstr;
 	CString BottomCstr;
-	CRect rt;
-	CBrush cBrush;
+	RECT rt;
+	/*CBrush cBrush;
 	CBrush *oldBrush;
 	cBrush.CreateSolidBrush(RGB(51, 153, 255));
 	CPen cPen;
@@ -36,28 +36,36 @@ void TextAreaSelected::SelectTextArea(TextEdit *textEdit, CDC *pDC) {
 	cPen.CreatePen(PS_NULL, 0, RGB(51, 153, 255));
 
 	oldBrush = pDC->SelectObject(&cBrush);
-	oldPen = pDC->SelectObject(&cPen);
-	pDC->SelectObject(&textEdit->cFont);
+	oldPen = pDC->SelectObject(&cPen);*/
+	pDC->SelectObject(&textEdit->lf);
+
+	pDC->SetTextColor(RGB(255, 255, 255));
+	pDC->SetBkColor(RGB(51, 153, 255));
+	pDC->SetBkMode(OPAQUE);
 
 	selected->GetRange(textEdit);
 	if (textEdit->selectedY == textEdit->caret->GetRowIndex()) {
 		this->selected->SingleLineSelected(textEdit, pDC, &TopCstr, &rt);
-		pDC->Rectangle(rt);
+		pDC->DrawText(TopCstr, &rt, textEdit->text->align | DT_NOCLIP | DT_EXPANDTABS);
+		//pDC->Rectangle(rt);
 	}
 	else {
 		this->selected->FirstMultiLineSelected(textEdit, pDC, &TopCstr, &rt);
-		pDC->Rectangle(&rt);
+		pDC->DrawText(TopCstr, &rt, DT_NOCLIP | DT_EXPANDTABS);
+		//pDC->Rectangle(&rt);
 		if (this->selected->GetStartRowIndex() + 1 < this->selected->GetEndRowIndex()) {
 			this->selected->MiddleMultiLineSelected(textEdit, pDC, &middleCstr, &rt);
-			pDC->Rectangle(&rt);
+			pDC->DrawText(middleCstr, &rt,textEdit->text->align | DT_NOCLIP | DT_EXPANDTABS);
+			//pDC->Rectangle(&rt);
 		}
 		this->selected->EndMultiLineSelected(textEdit, pDC, &BottomCstr, &rt);
-		pDC->Rectangle(&rt);
+		pDC->DrawText(BottomCstr, &rt, textEdit->text->align | DT_NOCLIP | DT_EXPANDTABS);
+		//pDC->Rectangle(&rt);
 	}
-	pDC->SelectObject(oldBrush);
+	/*pDC->SelectObject(oldBrush);
 	cBrush.DeleteObject();
 	pDC->SelectObject(oldPen);
-	cPen.DeleteObject();
+	cPen.DeleteObject();*/
 	
 	textEdit->copyBuffer = TopCstr + middleCstr + BottomCstr;
 

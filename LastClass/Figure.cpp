@@ -12,6 +12,7 @@ Figure::Figure() {
 	this->minimumWidth = 120;
 	this->minimumHeight = 29;
 	this->lf = { 0, };
+	this->align = DT_LEFT;
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height) {
@@ -23,6 +24,7 @@ Figure::Figure(Long x, Long y, Long width, Long height) {
 	this->minimumWidth = 120;
 	this->minimumHeight = 29;
 	this->lf = { 0, };
+	this->align = DT_LEFT;
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height, string content) {
@@ -34,6 +36,7 @@ Figure::Figure(Long x, Long y, Long width, Long height, string content) {
 	this->minimumWidth = 120; //여기도
 	this->minimumHeight = 29; // 입력받을 문자열에 맞게 값 줘야하는데
 	this->lf = { 0, };
+	this->align = DT_LEFT;
 }
 
 Figure::Figure(Long x, Long y, Long width, Long height, Long minimumWidth, Long minimumHeight, string content) {
@@ -45,6 +48,7 @@ Figure::Figure(Long x, Long y, Long width, Long height, Long minimumWidth, Long 
 	this->minimumWidth = minimumWidth;
 	this->minimumHeight = minimumHeight;
 	this->lf = { 0, };
+	this->align = DT_LEFT;
 }
 
 Figure::Figure(const Figure& source) {
@@ -56,6 +60,7 @@ Figure::Figure(const Figure& source) {
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
 	this->lf = source.lf;
+	this->align = source.align;
 }
 
 Long Figure::GetRowCount(string object) {
@@ -73,9 +78,10 @@ Long Figure::GetRowCount(string object) {
 	return count;
 }
 
-void Figure::ReplaceString(string content, LOGFONT lf) {
+void Figure::ReplaceString(string content, LOGFONT lf, Long align) {
 	this->content = content;
 	this->lf = lf;
+	this->align = align;
 }
 void Figure::SetX(Long x) {
 	this->x = x;
@@ -127,6 +133,7 @@ Figure& Figure::operator = (const Figure& source) {
 	this->minimumWidth = source.minimumWidth;
 	this->minimumHeight = source.minimumHeight;
 	this->lf = source.lf;
+	this->align = align;
 
 	return *this;
 }

@@ -26,6 +26,9 @@
 #include "Relation.h"
 #include "SelfRelation.h"
 #include "StatusBar.h"
+#include "FontSettingMenuAction.h"
+#include "MenuAction.h"
+#include "Menu.h"
 
 //#include <iostream>
 
@@ -56,7 +59,6 @@ TextEdit::TextEdit(ClassDiagramForm *classDiagramForm, Figure *figure, LOGFONT l
 	this->fontSet = NULL;
 	this->figure = figure;
 	this->rollNameBoxIndex = rollNameBoxIndex;
-	this->rowHeight = 25; // 폰트 사이즈
 	this->koreanEnglish = 0;
 	this->flagBuffer = 0;
 	this->flagInsert = 0;
@@ -85,7 +87,7 @@ int TextEdit::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->textAreaSelected = new TextAreaSelected;
 	this->cFont.CreateFontIndirect(&this->lf);
 	SetFont(&this->cFont, TRUE);
-
+	this->text->align = this->figure->align;
 	if (this->rollNameBoxIndex == -1) {
 		this->text->SprayString(this->figure->GetContent()); // 넘겨받아온거 자료구조로 뿌려줌 ㅇㅇㅇㅇㅇ
 	}
@@ -117,10 +119,10 @@ void TextEdit::OnPaint() {
 
 	memDC.SelectObject(&this->cFont);
 
+	this->text->Accept(writingVisitor, &memDC);// 받았던거 출력
 	if (this->flagSelection == 1) {
 		this->textAreaSelected->SelectTextArea(this, &memDC);
 	}
-	this->text->Accept(writingVisitor, &memDC);// 받았던거 출력
 
 	dc.BitBlt(0, 0, rt.right, rt.bottom, &memDC, 0, 0, SRCCOPY);
 
@@ -336,8 +338,9 @@ void TextEdit::OnKillFocus(CWnd *pNewWnd) {
 	ReleaseDC(pDC);
 
 	if (this->rollNameBoxIndex == -1) {
+		this->classDiagramForm->lf = this->lf;
 		string content(this->text->MakeText());
-		this->figure->ReplaceString(content, this->lf);
+		this->figure->ReplaceString(content, this->lf, text->align);
 	}
 	else if (dynamic_cast<Relation*>(this->figure)) {
 		string rollNameText(this->text->MakeText());
@@ -384,8 +387,9 @@ void TextEdit::OnClose() {
 	ReleaseDC(pDC);
 
 	if (this->rollNameBoxIndex == -1) {
+		this->classDiagramForm->lf = this->lf;
 		string content(this->text->MakeText());
-		this->figure->ReplaceString(content, this->lf);
+		this->figure->ReplaceString(content, this->lf, figure->align);
 	}
 	else if (dynamic_cast<Relation*>(this->figure)) {
 		string rollNameText(this->text->MakeText());

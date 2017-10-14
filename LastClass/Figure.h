@@ -21,7 +21,7 @@ public:
 
 	virtual Figure* Clone() const = 0;
 	Long GetRowCount(string object);
-	void ReplaceString(string content, LOGFONT lf);
+	void ReplaceString(string content, LOGFONT lf, Long align);
 	void SetX(Long x);
 	void SetY(Long y);
 	void SetWidth(Long width);
@@ -42,6 +42,7 @@ public:
 	Long GetMinimumWidth() const;
 public:
 	LOGFONT lf;
+	Long align;
 protected:
 	Long x;
 	Long y;

@@ -9,6 +9,7 @@
 Text::Text(Long capacity) : TextComposite(capacity) {
 	this->capacity = capacity;
 	this->length = 0;
+	this->align = DT_LEFT;
 }
 Text::~Text() {
 }
@@ -22,6 +23,7 @@ Text::Text(const Text& source) {
 	}
 	this->capacity = source.capacity;
 	this->length = source.length;
+	this->align = source.align;
 }
 
 Long Text::Add(Row *row) {
@@ -153,5 +155,6 @@ Text& Text::operator = (const Text& source) {
 	}
 	this->capacity = source.capacity;
 	this->length = source.length;
+	this->align = source.align;
 	return *this;
 }

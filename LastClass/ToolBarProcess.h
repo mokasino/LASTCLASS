@@ -17,6 +17,9 @@ public:
 	void OnSaveFileClicked(LastClass *lastClass);
 	void OnRedoFileClicked(LastClass *lastClass);
 	void OnUndoFileClicked(LastClass *lastClass);
+	void OnLeftAlignClicked(LastClass *lastClass);
+	void OnCenterAlignClicked(LastClass *lastClass);
+	void OnRightAlignClicked(LastClass *lastClass);
 	void OnCutFileClicked(LastClass *lastClass);
 	void OnCopyFileClicked(LastClass *lastClass);
 	void OnPasteFileClicked(LastClass *lastClass);

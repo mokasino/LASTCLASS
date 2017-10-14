@@ -120,8 +120,8 @@ Long ClassDiagramForm::Load() {
 	ifstream fTest;
 	Long j;
 	Long l;
+	Long align = 0;
 	Long rowLength = 0;
-	Long fontSize = 0;
 	string temp1;
 	string temp2;
 
@@ -150,7 +150,7 @@ Long ClassDiagramForm::Load() {
 				strcpy(this->lf.lfFaceName, temp1.c_str());
 				temp1.clear();
 				getline(fTest, temp1);
-				sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d",
+				sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d %d",
 					&this->lf.lfHeight,
 					&this->lf.lfWidth,
 					&this->lf.lfEscapement,
@@ -163,7 +163,7 @@ Long ClassDiagramForm::Load() {
 					&this->lf.lfOutPrecision,
 					&this->lf.lfClipPrecision,
 					&this->lf.lfQuality,
-					&this->lf.lfPitchAndFamily, &rowLength);
+					&this->lf.lfPitchAndFamily, &align, &rowLength);
 				temp2.clear();
 				j = 0;
 				while (j < rowLength) {
@@ -174,7 +174,7 @@ Long ClassDiagramForm::Load() {
 				}
 					Long k = temp2.find_last_of('\n');
 					temp2.replace(k, 1, "\0");
-					figureComposite->ReplaceString(temp2, this->lf);
+					figureComposite->ReplaceString(temp2, this->lf, align);
 			
 			}
 			i = 0;
@@ -188,7 +188,7 @@ Long ClassDiagramForm::Load() {
 					strcpy(this->lf.lfFaceName, temp1.c_str());
 					temp1.clear();
 					getline(fTest, temp1);
-					sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d",
+					sscanf_s((CString)temp1.c_str(), "%d %d %d %d %d %hhd %hhd %hhd %hhd %hhd %hhd %hhd %hhd %d %d",
 						&this->lf.lfHeight,
 						&this->lf.lfWidth,
 						&this->lf.lfEscapement,
@@ -201,7 +201,7 @@ Long ClassDiagramForm::Load() {
 						&this->lf.lfOutPrecision,
 						&this->lf.lfClipPrecision,
 						&this->lf.lfQuality,
-						&this->lf.lfPitchAndFamily, &rowLength);
+						&this->lf.lfPitchAndFamily, &align, &rowLength);
 					temp2.clear();
 					j = 0;
 					while (j < rowLength) {
@@ -212,7 +212,7 @@ Long ClassDiagramForm::Load() {
 					}
 						Long k = temp2.find_last_of('\n');
 						temp2.replace(k, 1, "\0");
-						figure->ReplaceString(temp2, this->lf);
+						figure->ReplaceString(temp2, this->lf, align);
 						if (type == 3) {
 							static_cast<Class*>(figureComposite)->Add(static_cast<Attribute*>(figure));
 						}
@@ -353,7 +353,7 @@ Long ClassDiagramForm::Save() {
 							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 							figure->lf.lfQuality << " " << 			// 출력의 질 
 							figure->lf.lfPitchAndFamily << " " << 	// 자간
-							rowLength << endl;
+							" " << figure->align << rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Line*>(object->GetAt(j))) {
@@ -380,7 +380,7 @@ Long ClassDiagramForm::Save() {
 							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 							figure->lf.lfQuality << " " << 			// 출력의 질 
 							figure->lf.lfPitchAndFamily << " " << 	// 자간
-							rowLength << endl;
+							" " << figure->align << rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Method*>(object->GetAt(j))) {
@@ -402,7 +402,7 @@ Long ClassDiagramForm::Save() {
 							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 							figure->lf.lfQuality << " " << 			// 출력의 질 
 							figure->lf.lfPitchAndFamily << " " << 	// 자간
-							rowLength << endl;
+							" " << figure->align << rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Reception*>(object->GetAt(j))) {
@@ -424,7 +424,7 @@ Long ClassDiagramForm::Save() {
 							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 							figure->lf.lfQuality << " " << 			// 출력의 질 
 							figure->lf.lfPitchAndFamily << " " << 	// 자간
-							rowLength << endl;
+							" " << figure->align << rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<Template*>(object->GetAt(j))) {
@@ -446,7 +446,7 @@ Long ClassDiagramForm::Save() {
 							figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 							figure->lf.lfQuality << " " << 			// 출력의 질 
 							figure->lf.lfPitchAndFamily << " " << 	// 자간
-							rowLength << endl;
+							" " << figure->align << rowLength << endl;
 						fTest << figure->GetContent() << endl;
 					}
 					else if (dynamic_cast<MemoLine*>(object->GetAt(j))) {
@@ -711,7 +711,7 @@ Long ClassDiagramForm::Save() {
 					figure->lf.lfClipPrecision << " " << 	// 클리핑 정확도 
 					figure->lf.lfQuality << " " << 			// 출력의 질 
 					figure->lf.lfPitchAndFamily << " " << 	// 자간
-					rowLength << endl;
+					" " << figure->align << rowLength << endl;
 				fTest << figure->GetContent() << endl;
 				while (j < object->GetLength()) {
 					Relation *relation = static_cast<Relation*>(object->GetAt(j));

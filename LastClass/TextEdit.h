@@ -42,7 +42,6 @@ public:
 	Long GetSelectedY() const;
 
 	Figure* GetFigure() const;
-	Long GetRowHeight() const;
 	Long GetKoreanEnglish() const;
 	Long GetFlagBuffer() const;
 	CString GetCopyBuffer() const;
@@ -59,7 +58,6 @@ public:
 	FontSet *fontSet;
 	Long flagInsert; //flag
 	Long flagSelection;
-	Long rowHeight; //figure에서 저장을 해줘야 하기때문에 삭제가능
 	Long selectedX; //보류
 	Long selectedY; //보류
 	CString copyBuffer;
@@ -81,9 +79,6 @@ inline Long TextEdit::GetFlagInsert() const {
 }
 inline Figure* TextEdit::GetFigure() const {
 	return const_cast<Figure*>(this->figure);
-}
-inline Long TextEdit::GetRowHeight() const {
-	return this->rowHeight;
 }
 inline Long TextEdit::GetKoreanEnglish() const {
 	return this->koreanEnglish;

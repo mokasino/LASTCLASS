@@ -32,6 +32,11 @@
 #include "DeleteGraphicKeyMenuAction.h"
 #include "FilePrintMenuAction.h"
 #include "AboutMenuAction.h"
+#include "LeftAlignMenuAction.h"
+#include "CenterAlignMenuAction.h"
+#include "RightAlignMenuAction.h"
+
+
 
 ToolBarProcess::ToolBarProcess() {
 }
@@ -54,6 +59,18 @@ void ToolBarProcess::OnSaveFileClicked(LastClass *lastClass) {
 void ToolBarProcess::OnRedoFileClicked(LastClass *lastClass) {
 	GraphicCtrlRedoMenuAction graphicCtrlRedoMenuAction;
 	graphicCtrlRedoMenuAction.MenuPress(lastClass);
+}
+void ToolBarProcess::OnLeftAlignClicked(LastClass *lastClass) {
+	LeftAlignMenuAction leftAlignMenuAction;
+	leftAlignMenuAction.MenuPress(lastClass);
+}
+void ToolBarProcess::OnCenterAlignClicked(LastClass *lastClass) {
+	CenterAlignMenuAction centerAlignMenuAction;
+	centerAlignMenuAction.MenuPress(lastClass);
+}
+void ToolBarProcess::OnRightAlignClicked(LastClass *lastClass) {
+	RightAlignMenuAction rightAlignMenuAction;
+	rightAlignMenuAction.MenuPress(lastClass);
 }
 void ToolBarProcess::OnUndoFileClicked(LastClass *lastClass) {
 	GraphicCtrlUndoMenuAction graphicCtrlUndoMenuAction;

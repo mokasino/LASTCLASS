@@ -12,7 +12,7 @@ FontSet::FontSet() {
 
 FontSet::FontSet(LOGFONT *lf) { // ClassDiagramForm->OnCreate
 	//Set Default
-	lf->lfHeight = 25;										// 글꼴의 높이
+	lf->lfHeight = 19;										// 글꼴의 높이
 	lf->lfWidth = 0;										// 글꼴의 너비
 	lf->lfEscapement = 0;									// 방향
 	lf->lfOrientation = 0;									// 회전각도
@@ -34,7 +34,7 @@ FontSet::FontSet(const FontSet& source) {
 
 LOGFONT& FontSet::RelationFontSet() {
 	//Set Default
-	lf.lfHeight = 13;										// 글꼴의 높이
+	lf.lfHeight = 15;										// 글꼴의 높이
 	lf.lfWidth = 0;											// 글꼴의 너비
 	lf.lfEscapement = 0;									// 방향
 	lf.lfOrientation = 0;									// 회전각도
@@ -59,6 +59,7 @@ CFont* FontSet::SetFont(const LOGFONT& lf, CDC *pDC) {
 
 void FontSet::ApplyFont(TextEdit *textEdit) {
 	CDC *pDC = textEdit->GetDC();
+	pDC->SetBkMode(TRANSPARENT);
 	this->p_oldFont = pDC->SelectObject(&textEdit->cFont);
 	pDC->SelectObject(this->p_oldFont);
 	textEdit->cFont.DeleteObject();
