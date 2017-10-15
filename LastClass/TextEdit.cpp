@@ -119,7 +119,7 @@ void TextEdit::OnPaint() {
 
 	memDC.SelectObject(&this->cFont);
 
-	this->text->Accept(writingVisitor, &memDC);// 받았던거 출력
+	this->text->Accept(writingVisitor, rt, &memDC);// 받았던거 출력
 	if (this->flagSelection == 1) {
 		this->textAreaSelected->SelectTextArea(this, &memDC);
 	}

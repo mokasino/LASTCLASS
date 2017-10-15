@@ -106,21 +106,21 @@ void ToolBar::MakeToolBar(HWND hWndParent) {
 	tbb[8].iString = iredo;
 	tbb[9].fsStyle = TBSTYLE_BUTTON | BTNS_SEP;
 
-	//tbb[10].iBitmap = ;
+	tbb[10].iBitmap = STD_FILENEW;
 	tbb[10].fsState = TBSTATE_ENABLED;
 	tbb[10].fsStyle = TBSTYLE_BUTTON;
 	tbb[10].idCommand = ID_BUTTON40007;
 	tbb[10].iString = iLeftAlign;
 	tbb[11].fsStyle = TBSTYLE_BUTTON | BTNS_SEP;
 
-	//tbb[12].iBitmap = ;
+	tbb[12].iBitmap = STD_FILENEW;
 	tbb[12].fsState = TBSTATE_ENABLED;
 	tbb[12].fsStyle = TBSTYLE_BUTTON;
 	tbb[12].idCommand = ID_BUTTON40008;
 	tbb[12].iString = iCenterAlign;
 	tbb[13].fsStyle = TBSTYLE_BUTTON | BTNS_SEP;
 
-	//tbb[14].iBitmap = ;
+	tbb[14].iBitmap = STD_FILENEW;
 	tbb[14].fsState = TBSTATE_ENABLED;
 	tbb[14].fsStyle = TBSTYLE_BUTTON;
 	tbb[14].idCommand = ID_BUTTON40009;

@@ -1386,5 +1386,5 @@ void DrawingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
 }
 void DrawingVisitor::Visit(Relation *relation, CDC *cPaintDc) {
 }
-void DrawingVisitor::Visit(Text* text, CDC* pDC) {
+void DrawingVisitor::Visit(Text* text, RECT& rt, CDC* pDC) {
 }

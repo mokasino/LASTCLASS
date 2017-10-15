@@ -39,6 +39,27 @@
     <Filter Include="Print">
       <UniqueIdentifier>{ab0b2afc-66a8-4c56-bc66-62f3d7c4029e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu\Interface">
+      <UniqueIdentifier>{1c9152f2-1fd7-46b3-a7ae-facf5cf42540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Edit">
+      <UniqueIdentifier>{acafbc8d-b8ad-468f-b0c2-273d8562db16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Help">
+      <UniqueIdentifier>{b0a7cbe9-4412-4ce2-87b8-df66a772420a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Relation">
+      <UniqueIdentifier>{5d04165b-c70d-4d76-96aa-1b9205b59a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\File">
+      <UniqueIdentifier>{2c46abee-651d-4e85-808a-cc3553eea7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Context">
+      <UniqueIdentifier>{5d4a69e9-24bb-456d-9e5a-704af52dc6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu\Interface\ToolBar">
+      <UniqueIdentifier>{0a6e35c1-995b-4604-88ca-0a821bc44c91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h">
@@ -407,48 +428,6 @@
     <ClInclude Include="RemoveTemplateKey.h">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClInclude>
-    <ClInclude Include="AggregationMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AggregationsMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AssociationMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="CompositionMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="CompositionsMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DependencyMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectedAssociationMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneralizationMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoLineMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoBoxMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="RealizationMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicCtrlAllKey.h">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClInclude>
@@ -462,24 +441,6 @@
       <Filter>ClassDiagram</Filter>
     </ClInclude>
     <ClInclude Include="LastClass.h" />
-    <ClInclude Include="SaveAsMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="SaveMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="NewMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="SupportMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="SupportMenu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="DrawingResize.h">
       <Filter>ClassDiagram</Filter>
     </ClInclude>
@@ -539,9 +500,6 @@
     <ClInclude Include="EditResizerBlocker.h">
       <Filter>TextEdit</Filter>
     </ClInclude>
-    <ClInclude Include="StatusBar.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="PrintPreviewButton.h">
       <Filter>Print</Filter>
     </ClInclude>
@@ -562,37 +520,6 @@
     </ClInclude>
     <ClInclude Include="PrintPreviewPrintButton.h">
       <Filter>Print</Filter>
-    </ClInclude>
-    <ClInclude Include="FilePrintMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="FilePrintPreviewMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="PrintPreview.h" />
-    <ClInclude Include="GraphicCtrlRedoMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicCtrlUndoMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolBarProcess.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolBar.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicCtrlPasteMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicCtrlCopyMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicCtrlCutMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteGraphicKeyMenuAction.h">
-      <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="CtrlNewKey.h">
       <Filter>KeyAction\ClassDiagram</Filter>
@@ -619,45 +546,6 @@
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClInclude>
     <ClInclude Include="LastClassApp.h" />
-    <ClInclude Include="DeleteTemplateMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassDiagramFormMenu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteAttributeMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteMethodMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteReceptionMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddTemplateMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AboutMenu.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AboutMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddAttributeMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddMethodMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AddReceptionMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ExitKeyMenuAction.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -673,11 +561,156 @@
     <ClInclude Include="GraphicRightArrowKey.h">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClInclude>
-    <ClInclude Include="PrintPreviewState.h" />
-    <ClInclude Include="FontSettingMenuAction.h" />
-    <ClInclude Include="LeftAlignMenuAction.h" />
-    <ClInclude Include="RightAlignMenuAction.h" />
-    <ClInclude Include="CenterAlignMenuAction.h" />
+    <ClInclude Include="AboutMenu.h">
+      <Filter>Menu\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="SupportMenuAction.h">
+      <Filter>Menu\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="SupportMenu.h">
+      <Filter>Menu\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutMenuAction.h">
+      <Filter>Menu\Help</Filter>
+    </ClInclude>
+    <ClInclude Include="AddAttributeMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AddMethodMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AddReceptionMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AddTemplateMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AggregationMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AggregationsMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="AssociationMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDiagramFormMenu.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoLineMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectedAssociationMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositionsMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositionMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuAction.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBar.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBarProcess.h">
+      <Filter>Menu\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="RealizationMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="RightAlignMenuAction.h">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftAlignMenuAction.h">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClInclude>
+    <ClInclude Include="CenterAlignMenuAction.h">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCtrlUndoMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCtrlCopyMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCtrlCutMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCtrlPasteMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicCtrlRedoMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralizationMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteTemplateMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteAttributeMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteGraphicKeyMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteMethodMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteReceptionMenuAction.h">
+      <Filter>Menu\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveAsMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="NewMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="FilePrintPreviewMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="FilePrintMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="DependencyMenuAction.h">
+      <Filter>Menu\Relation</Filter>
+    </ClInclude>
+    <ClInclude Include="FontSettingMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitKeyMenuAction.h">
+      <Filter>Menu\File</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoBoxMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassMenuAction.h">
+      <Filter>Menu\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintPreview.h">
+      <Filter>Print</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintPreviewState.h">
+      <Filter>MouseAction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Figure.cpp">
@@ -1046,67 +1079,10 @@
     <ClCompile Include="GraphicCtrlAllKey.cpp">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="MemoBoxMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="MemoLineMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneralizationMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectedAssociationMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DependencyMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="CompositionsMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="CompositionMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AssociationMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AggregationsMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AggregationMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="RealizationMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="WritingVisitor.cpp">
       <Filter>TextEdit</Filter>
     </ClCompile>
     <ClCompile Include="LastClass.cpp" />
-    <ClCompile Include="OpenMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="NewMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SaveMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SaveAsMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SupportMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SupportMenu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="OnHScrollEnd.cpp">
       <Filter>ScrollBar</Filter>
     </ClCompile>
@@ -1149,17 +1125,8 @@
     <ClCompile Include="DrawingResize.cpp">
       <Filter>ClassDiagram</Filter>
     </ClCompile>
-    <ClCompile Include="MenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="OnVScrollEnd.cpp">
       <Filter>ScrollBar</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicCtrlRedoMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicCtrlUndoMenuAction.cpp">
-      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="ClassDiagramForm.cpp" />
     <ClCompile Include="GraphicCtrlCopyKey.cpp">
@@ -1172,9 +1139,6 @@
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClCompile>
     <ClCompile Include="TextEdit.cpp" />
-    <ClCompile Include="StatusBar.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="PrintPreviewButton.cpp">
       <Filter>Print</Filter>
     </ClCompile>
@@ -1195,31 +1159,6 @@
     </ClCompile>
     <ClCompile Include="PrintPreviewZoomOutButton.cpp">
       <Filter>Print</Filter>
-    </ClCompile>
-    <ClCompile Include="FilePrintMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="FilePrintPreviewMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="PrintPreview.cpp" />
-    <ClCompile Include="ToolBarProcess.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolBar.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicCtrlCopyMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicCtrlCutMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicCtrlPasteMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteGraphicKeyMenuAction.cpp">
-      <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="CtrlNewKey.cpp">
       <Filter>KeyAction\ClassDiagram</Filter>
@@ -1245,45 +1184,6 @@
     <ClCompile Include="GraphicCtrlDeleteKey.cpp">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClCompile>
-    <ClCompile Include="AboutMenu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AboutMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="ExitKeyMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassDiagramFormMenu.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteAttributeMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteMethodMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteReceptionMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteTemplateMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AddTemplateMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AddAttributeMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AddMethodMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AddReceptionMenuAction.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="EditResizerBlocker.cpp">
       <Filter>TextEdit</Filter>
     </ClCompile>
@@ -1300,11 +1200,156 @@
     <ClCompile Include="GraphicUpArrowKey.cpp">
       <Filter>KeyAction\ClassDiagram</Filter>
     </ClCompile>
-    <ClCompile Include="PrintPreviewState.cpp" />
-    <ClCompile Include="FontSettingMenuAction.cpp" />
-    <ClCompile Include="CenterAlignMenuAction.cpp" />
-    <ClCompile Include="LeftAlignMenuAction.cpp" />
-    <ClCompile Include="RightAlignMenuAction.cpp" />
+    <ClCompile Include="AboutMenu.cpp">
+      <Filter>Menu\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="SupportMenuAction.cpp">
+      <Filter>Menu\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="SupportMenu.cpp">
+      <Filter>Menu\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutMenuAction.cpp">
+      <Filter>Menu\Help</Filter>
+    </ClCompile>
+    <ClCompile Include="AddAttributeMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMethodMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AddReceptionMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AddTemplateMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AggregationMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AggregationsMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="AssociationMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassDiagramFormMenu.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoLineMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectedAssociationMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositionsMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositionMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuAction.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBar.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBar.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBarProcess.cpp">
+      <Filter>Menu\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="RealizationMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="RightAlignMenuAction.cpp">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftAlignMenuAction.cpp">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClCompile>
+    <ClCompile Include="CenterAlignMenuAction.cpp">
+      <Filter>Menu\Interface\ToolBar</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCtrlCutMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCtrlPasteMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCtrlRedoMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCtrlUndoMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicCtrlCopyMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralizationMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteAttributeMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteGraphicKeyMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteMethodMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteReceptionMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteTemplateMenuAction.cpp">
+      <Filter>Menu\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveAsMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="NewMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="FilePrintMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="FilePrintPreviewMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="DependencyMenuAction.cpp">
+      <Filter>Menu\Relation</Filter>
+    </ClCompile>
+    <ClCompile Include="FontSettingMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitKeyMenuAction.cpp">
+      <Filter>Menu\File</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoBoxMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassMenuAction.cpp">
+      <Filter>Menu\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintPreview.cpp">
+      <Filter>Print</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintPreviewState.cpp">
+      <Filter>MouseAction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LastClass.rc">

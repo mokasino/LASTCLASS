@@ -129,6 +129,25 @@ Long Text::MaxWidth(CDC* pDC) {
 	return width;
 }
 
+void Text::CheckAlign(RECT& rt, Long *width){
+	if (this->align == DT_CENTER) {
+		*width = (rt.right + (*width)) / 2;
+	}
+	else if (this->align == DT_RIGHT) {
+		*width = rt.right - 1;		
+	}
+}
+
+void Text::CheckAlignPoint(RECT& rt, Long *pointX, Long rowIndex, CDC *pDC) {
+	Long width = this->GetAt(rowIndex)->GetRowWidth(pDC, this->GetAt(rowIndex)->GetLength());
+
+	if (this->align == DT_CENTER) {
+	}
+	else if (this->align == DT_RIGHT) {
+		*pointX = rt.right - width;
+	}
+}
+
 Row* Text::GetAt(Long index) {
 	return static_cast<Row*>(this->textComponents.GetAt(index));
 }
@@ -137,8 +156,8 @@ TextComponent* Text::Clone() const {
 	return new Text(*this);
 }
 
-void Text::Accept(Visitor& visitor, CDC* pDC) {
-	visitor.Visit(this, pDC);
+void Text::Accept(Visitor& visitor, RECT& rt, CDC* pDC) {
+	visitor.Visit(this, rt, pDC);
 }
 
 Row* Text::operator [] (Long index) {

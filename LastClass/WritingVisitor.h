@@ -43,7 +43,7 @@ public:
 	void Visit(SelfRelation *selfRelation, CDC *pDC);
 	void Visit(Relation *relation, CDC *pDC);
 
-	void Visit(Text* text, CDC* pDC);
+	void Visit(Text* text, RECT& rt, CDC* pDC);
 };
 
 #endif // _WRITINGVISITOR_H

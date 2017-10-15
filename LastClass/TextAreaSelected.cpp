@@ -68,5 +68,6 @@ void TextAreaSelected::SelectTextArea(TextEdit *textEdit, CDC *pDC) {
 	cPen.DeleteObject();*/
 	
 	textEdit->copyBuffer = TopCstr + middleCstr + BottomCstr;
-
+	pDC->SetBkColor(RGB(255, 255, 255));
+	pDC->SetBkMode(TRANSPARENT);
 }

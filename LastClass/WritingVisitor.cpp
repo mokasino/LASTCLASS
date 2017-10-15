@@ -22,18 +22,18 @@ void WritingVisitor::Visit(Diagram *diagram, Selection *selection, Long distance
 }
 void WritingVisitor::Visit(Class *object, CDC* cPaintDc) {
 }
-void WritingVisitor::Visit(Text* text, CDC* cPaintDc) {
+void WritingVisitor::Visit(Text* text, RECT& rt, CDC* cPaintDc) {
 	LOGFONT lf;
 	CFont *pFont = cPaintDc->GetCurrentFont();
 	pFont->GetLogFont(&lf);
 	Long textHeight = lf.lfHeight;
 	Long textWidth = text->MaxWidth(cPaintDc);
 
-	cPaintDc->SetTextColor(RGB(0, 0, 0));
-	cPaintDc->SetBkColor(RGB(255, 255, 255));
-	cPaintDc->SetBkMode(TRANSPARENT);
-	RECT rt = { 0 , 0, textWidth, text->GetLength() * textHeight };
-	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rt, text->align | DT_EXPANDTABS);
+	//cPaintDc->SetTextColor(RGB(0, 0, 0));
+	//cPaintDc->SetBkColor(RGB(255, 255, 255));
+	//cPaintDc->SetBkMode(TRANSPARENT);
+	RECT rect = {0 , 0, rt.right, text->GetLength() * textHeight };
+	cPaintDc->DrawText((CString)text->MakeText().c_str(), &rect, text->align | DT_EXPANDTABS);
 }
 
 void  WritingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {

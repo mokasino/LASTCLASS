@@ -45,7 +45,7 @@ public:
 	void Visit(SelfRelation *selfRelation, CDC *cPaintDc);
 	void Visit(Relation *relation, CDC *cPaintDc);
 
-	void Visit(Text* text, CDC* pDC);
+	void Visit(Text* text, RECT& rt, CDC* pDC);
 };
 
 

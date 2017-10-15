@@ -3,9 +3,10 @@
 // LastClass.rc에서 사용되고 있습니다.
 //
 #define IDR_TOOLBAR                     101
+#define ID_BUTTON40001                  40001
 #define ID_BUTTON40002                  40002
 #define ID_BUTTON40003                  40003
-#define ID_BUTTON40001                  40004
+#define ID_BUTTON40004                  40004
 #define ID_BUTTON40005                  40005
 #define ID_BUTTON40006                  40006
 #define ID_BUTTON40007                  40007
@@ -26,7 +27,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        107
+#define _APS_NEXT_RESOURCE_VALUE        124
 #define _APS_NEXT_COMMAND_VALUE         40020
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

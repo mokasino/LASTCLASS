@@ -26,12 +26,14 @@ public:
 	virtual TextComponent* Clone() const;
 
 	string MakeText();
+	void CheckAlign(RECT& rt, Long *width);
+	void CheckAlignPoint(RECT& rt, Long *pointX, Long rowIndex, CDC *pDC);
 	void SprayString(string str);
 
 	Long MaxWidth(CDC* pDC);
 	Row* GetAt(Long index);
 	
-	void Accept(Visitor& visitor, CDC* pDC);
+	void Accept(Visitor& visitor, RECT& rt, CDC* pDC);
 
 	Text& operator = (const Text& source);
 	Row* operator [] (Long index);

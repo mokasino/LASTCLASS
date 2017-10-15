@@ -79,7 +79,7 @@ public:
 	virtual void Visit(SelfComposition *selfComposition, CDC *pDC) = 0;
 	virtual void Visit(SelfCompositions *selfCompositions, CDC *pDC) = 0;
 
-	virtual void Visit(Text* text, CDC *pDC) = 0;
+	virtual void Visit(Text* text, RECT& rt, CDC *pDC) = 0;
 protected:
 	Visitor();
 };

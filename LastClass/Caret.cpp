@@ -30,8 +30,11 @@ void Caret::MoveToIndex(TextEdit *textEdit, CDC *pDC) {
 	Long column = 0;
 	Long tabWidth = 0;
 	Long i = 0;
-
+	RECT rt;
+	textEdit->GetClientRect(&rt);
 	pointX += textEdit->text->GetAt((this->rowIndex))->GetRowWidth(pDC, this->characterIndex);
+
+	textEdit->text->CheckAlign(rt, &pointX);
 
 	textEdit->CreateSolidCaret(2, textEdit->lf.lfHeight);
 	if (textEdit->GetFlagBuffer() == 1) {
@@ -42,6 +45,7 @@ void Caret::MoveToIndex(TextEdit *textEdit, CDC *pDC) {
 	}
 	this->currentCaretX = pointX;
 	this->currentCaretY = pointY;
+
 	textEdit->SetCaretPos(CPoint(pointX, pointY));
 	textEdit->ShowCaret();
 }
@@ -52,6 +56,8 @@ void Caret::MoveToPoint(TextEdit *textEdit, CDC *pDC, CPoint point) {
 	CString str;
 	this->characterIndex = 0;
 	this->rowIndex = 0;
+	RECT rt;
+	textEdit->GetClientRect(&rt);
 
 	Long height = 0;
 	while (y > 0 && height <= y && this->rowIndex < textEdit->text->GetLength()) {
@@ -61,6 +67,9 @@ void Caret::MoveToPoint(TextEdit *textEdit, CDC *pDC, CPoint point) {
 	if (y > 0 && textEdit->text->GetLength() > 0) {
 		this->rowIndex--;
 	}
+
+	textEdit->text->CheckAlignPoint(rt, &x, rowIndex, pDC);
+
 	Long width = 0;
 	while (this->characterIndex < textEdit->text->GetAt(this->rowIndex)->GetLength() && x > 0 && width <= x) {
 		str = textEdit->text->GetAt(this->rowIndex)->GetAt(this->characterIndex)->MakeCString();

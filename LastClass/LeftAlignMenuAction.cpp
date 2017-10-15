@@ -13,6 +13,6 @@ LeftAlignMenuAction::~LeftAlignMenuAction() {
 void LeftAlignMenuAction::MenuPress(LastClass* lastClass) {
 	if (lastClass->classDiagramForm->textEdit != 0) {
 		lastClass->classDiagramForm->textEdit->text->align = DT_LEFT;
-		lastClass->classDiagramForm->textEdit->Invalidate();
+		lastClass->classDiagramForm->textEdit->Invalidate(false);
 	}
 }

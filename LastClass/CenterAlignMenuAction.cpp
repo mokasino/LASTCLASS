@@ -13,6 +13,6 @@ CenterAlignMenuAction::~CenterAlignMenuAction() {
 void CenterAlignMenuAction::MenuPress(LastClass* lastClass) {
 	if (lastClass->classDiagramForm->textEdit != 0) {
 		lastClass->classDiagramForm->textEdit->text->align = DT_CENTER;
-		lastClass->classDiagramForm->textEdit->Invalidate();
+		lastClass->classDiagramForm->textEdit->Invalidate(false);
 	}
 }
