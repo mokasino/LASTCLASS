@@ -18,6 +18,75 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrayIterator.cpp" />
+    <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="Caret.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Class.cpp" />
+    <ClCompile Include="ClassDiagramForm.cpp" />
+    <ClCompile Include="ClassName.cpp" />
+    <ClCompile Include="Diagram.cpp" />
+    <ClCompile Include="DoubleByteCharacter.cpp" />
+    <ClCompile Include="DrawingVisitor.cpp" />
+    <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="FigureComposite.cpp" />
+    <ClCompile Include="FigureFactory.cpp" />
+    <ClCompile Include="LastClass.cpp" />
+    <ClCompile Include="LastClassApp.cpp" />
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="Method.cpp" />
+    <ClCompile Include="MovingVisitor.cpp" />
+    <ClCompile Include="Reception.cpp" />
+    <ClCompile Include="Relation.cpp" />
+    <ClCompile Include="Row.cpp" />
+    <ClCompile Include="SingleByteCharacter.cpp" />
+    <ClCompile Include="Template.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextComponent.cpp" />
+    <ClCompile Include="TextComposite.cpp" />
+    <ClCompile Include="TextEdit.cpp" />
+    <ClCompile Include="Visitor.cpp" />
+    <ClCompile Include="WriteKoreanText.cpp" />
+    <ClCompile Include="WriteKoreanTextProcess.cpp" />
+    <ClCompile Include="WritingVisitor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Array.h" />
+    <ClInclude Include="ArrayIterator.h" />
+    <ClInclude Include="Attribute.h" />
+    <ClInclude Include="Caret.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Class.h" />
+    <ClInclude Include="ClassDiagramForm.h" />
+    <ClInclude Include="ClassName.h" />
+    <ClInclude Include="Diagram.h" />
+    <ClInclude Include="DoubleByteCharacter.h" />
+    <ClInclude Include="DrawingVisitor.h" />
+    <ClInclude Include="Figure.h" />
+    <ClInclude Include="FigureComposite.h" />
+    <ClInclude Include="FigureFactory.h" />
+    <ClInclude Include="Iterator.h" />
+    <ClInclude Include="LastClass.h" />
+    <ClInclude Include="LastClassApp.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="Method.h" />
+    <ClInclude Include="MovingVisitor.h" />
+    <ClInclude Include="Reception.h" />
+    <ClInclude Include="Relation.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Row.h" />
+    <ClInclude Include="SingleByteCharacter.h" />
+    <ClInclude Include="Template.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextComponent.h" />
+    <ClInclude Include="TextComposite.h" />
+    <ClInclude Include="TextEdit.h" />
+    <ClInclude Include="Visitor.h" />
+    <ClInclude Include="WriteKoreanText.h" />
+    <ClInclude Include="WriteKoreanTextProcess.h" />
+    <ClInclude Include="WritingVisitor.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{EE54C3EA-961D-4217-8B0F-44C954776CB5}</ProjectGuid>

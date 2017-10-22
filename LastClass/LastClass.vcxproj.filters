@@ -1,2 +1,228 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form">
+      <UniqueIdentifier>{0dbee86b-bf92-4fb3-8533-d2c0281bce37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextEditor">
+      <UniqueIdentifier>{50d66e73-7b22-4889-bd9e-3e90fda0a72e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Array Iterator">
+      <UniqueIdentifier>{60538213-e03a-4419-9136-76c6ecc9659e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Figure">
+      <UniqueIdentifier>{dd995f50-fb02-4656-a35e-96e8fc236a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Figure Composite">
+      <UniqueIdentifier>{c45f3961-44f9-4b76-8f55-9a6af316aec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visitor">
+      <UniqueIdentifier>{568ae308-b9c4-4c1e-8d89-924fccec46ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{347304ee-84a9-46ef-9fa7-811fc16f6db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{16889870-35cc-40b0-90fb-a8028df42807}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LastClass.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEdit.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="LastClassApp.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDiagramForm.h">
+      <Filter>Form</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleByteCharacter.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleByteCharacter.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComposite.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Row.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Class.h">
+      <Filter>Figure Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagram.h">
+      <Filter>Figure Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="FigureComposite.h">
+      <Filter>Figure Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>Array Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="Template.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="Reception.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="Method.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="Figure.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="Attribute.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassName.h">
+      <Filter>Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayIterator.h">
+      <Filter>Array Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="Visitor.h">
+      <Filter>Visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="WritingVisitor.h">
+      <Filter>Visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingVisitor.h">
+      <Filter>Visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingVisitor.h">
+      <Filter>Visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteKoreanTextProcess.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteKoreanText.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Caret.h">
+      <Filter>TextEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="FigureFactory.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Relation.h">
+      <Filter>Figure Composite</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterator.h">
+      <Filter>Array Iterator</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LastClass.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEdit.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="LastClassApp.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassDiagramForm.cpp">
+      <Filter>Form</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleByteCharacter.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleByteCharacter.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComposite.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Row.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Class.cpp">
+      <Filter>Figure Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagram.cpp">
+      <Filter>Figure Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="FigureComposite.cpp">
+      <Filter>Figure Composite</Filter>
+    </ClCompile>
+    <ClCompile Include="Template.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Reception.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Method.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Figure.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassName.cpp">
+      <Filter>Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayIterator.cpp">
+      <Filter>Array Iterator</Filter>
+    </ClCompile>
+    <ClCompile Include="Visitor.cpp">
+      <Filter>Visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="WritingVisitor.cpp">
+      <Filter>Visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingVisitor.cpp">
+      <Filter>Visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingVisitor.cpp">
+      <Filter>Visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteKoreanText.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteKoreanTextProcess.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Caret.cpp">
+      <Filter>TextEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="FigureFactory.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Relation.cpp">
+      <Filter>Figure Composite</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
