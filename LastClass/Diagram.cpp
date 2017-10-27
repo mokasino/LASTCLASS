@@ -104,7 +104,7 @@ Figure* Diagram::FindItem(Long x, Long y) {
 	Long index = -1;
 	Long j = 0;
 	smartPointer->First();
-	while (!smartPointer->IsDone() && index != 0) {
+	while (!smartPointer->IsDone()&& index != 0) {
 		endX = smartPointer->Current()->GetX() + smartPointer->Current()->GetWidth();
 		endY = smartPointer->Current()->GetY() + smartPointer->Current()->GetHeight();
 		if (smartPointer->Current()->GetX() <= x && endX >= x && smartPointer->Current()->GetY() <= y && endY >= y) {

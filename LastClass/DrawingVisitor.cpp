@@ -2077,7 +2077,9 @@ void DrawingVisitor::Visit(SelfRelation *selfRelation, CDC *cPaintDc) {
 		!dynamic_cast<Compositions*>(selfRelation) && !dynamic_cast<Dependency*>(selfRelation) &&
 		!dynamic_cast<Realization*>(selfRelation)) {
 		CFont font;
-		font.CreateFont(10 * this->zoomRate / 100, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
+		LastClass *test = (LastClass*)(CFrameWnd::FindWindow(NULL, "lastClass"));
+		int ih = MulDiv(9 * (test->classDiagramForm->zoomRate-30) / 100, GetDeviceCaps(cPaintDc->m_hDC, LOGPIXELSY), 72);
+		font.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
 			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
 		CFont*  oldFont;
 		oldFont = cPaintDc->SelectObject(&font);
@@ -2114,7 +2116,9 @@ void DrawingVisitor::Visit(Relation *relation, CDC *cPaintDc) {
 		!dynamic_cast<Compositions*>(relation) && !dynamic_cast<Dependency*>(relation) &&
 		!dynamic_cast<Realization*>(relation) && !dynamic_cast<MemoLine*>(relation)) {
 		CFont font;
-		font.CreateFont(10 * this->zoomRate / 100, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
+		LastClass *test = (LastClass*)(CFrameWnd::FindWindow(NULL, "lastClass"));
+		int ih = MulDiv(9 * (test->classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(cPaintDc->m_hDC, LOGPIXELSY), 72);
+		font.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
 			OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
 		CFont*  oldFont;
 		oldFont = cPaintDc->SelectObject(&font);

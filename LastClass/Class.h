@@ -7,6 +7,7 @@
 #include "FigureComposite.h"
 #include "DrawingVisitor.h"
 
+class ClassDiagramForm;
 class Class : public FigureComposite {
 public:
 	Class(Long capacity = 64);  // 관리는 Line을 하고
@@ -45,6 +46,8 @@ public:
 	virtual Long Add(Figure *figure);
 	virtual Long Remove(Long index);
 	Long Correct(Figure *figure, Long index);
+	void GetSpaceWidth(ClassDiagramForm *classDiagramForm);
+	void GetSpaceHeight(ClassDiagramForm *classDiagramForm);
 
 	virtual Figure* GetAt(Long index);
 
@@ -56,6 +59,8 @@ public:
 	Long GetMethodPosition()const;
 	Long GetReceptionPosition() const;
 	Long GetTempletePosition() const;
+public:
+	Long spaceWidth;
 private:
 	Long attributePosition;
 	Long methodPosition;

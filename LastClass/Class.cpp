@@ -1067,8 +1067,57 @@ Long Class::SetMinimumWidthR(Long zoomRate) {
 	return this->minimumWidth;
 }
 
-
-
 Long Class::Correct(Figure *figure, Long index) {
 	return index = this->figures.Modify(index, figure);
+}
+
+void Class::GetSpaceWidth(ClassDiagramForm *classDiagramForm) {
+	CFont cFont;
+	Long bigger = 0;
+	Long space = 0;
+	CDC *dc = classDiagramForm->GetDC();
+	int ih = MulDiv(20 * (classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
+	cFont.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
+	CFont *oldFont = dc->SelectObject(&cFont);   // 폰트 시작
+
+	SmartPointer<Figure*> iterator(this->CreateIterator());
+	for (iterator->First();!iterator->IsDone();iterator->Next()) {
+		if (!dynamic_cast<Line*>(iterator->Current()) && !dynamic_cast<Relation*>(iterator->Current()) && !dynamic_cast<SelfRelation*>(iterator->Current())) {
+			CRect rt;
+			dc->DrawText((CString)iterator->Current()->GetContent().c_str(), &rt, DT_CALCRECT);
+			if (bigger < rt.right) {
+				bigger = rt.right + GabX;
+				this->spaceWidth = iterator->Current()->GetWidth() - bigger;
+			}
+		}
+	}
+	dc->SelectObject(oldFont);
+	cFont.DeleteObject(); // 폰트
+	classDiagramForm->ReleaseDC(dc);
+}
+
+void Class::GetSpaceHeight(ClassDiagramForm *classDiagramForm) {
+	Long rowLength = 1;
+	size_t pos = 0;
+	size_t offset = 0;
+
+	CDC *dc = classDiagramForm->GetDC();
+	int ih = MulDiv(20 * (classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
+
+	SmartPointer<Figure*> iterator(this->CreateIterator());
+	for (iterator->First();!iterator->IsDone();iterator->Next()) {
+		if (!dynamic_cast<Line*>(iterator->Current()) && !dynamic_cast<Relation*>(iterator->Current()) && !dynamic_cast<SelfRelation*>(iterator->Current())) {
+			string str = iterator->Current()->GetContent();
+			offset = 0;
+			while ((pos = str.find("\n", offset)) != string::npos) {
+				rowLength++;
+				offset = pos + 1;
+			}
+			if (pos != -1) {
+
+			}
+		}
+	}
+	classDiagramForm->ReleaseDC(dc);
 }
