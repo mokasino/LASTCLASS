@@ -162,7 +162,7 @@ void PrintPreview::OnPaint() {
 	pOldBitmap = memDC.SelectObject(&bitmap);
 	memDC.FillSolidRect(CRect(0, 0, horiPaper, verPaper), RGB(255, 255, 255));
 	CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-	int ih = MulDiv(20 * (this->lastClass->classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc, LOGPIXELSY), 72);// 폰트 사이즈
+	int ih = MulDiv(14 * (this->lastClass->classDiagramForm->zoomRate - 0) / 100, GetDeviceCaps(dc, LOGPIXELSY), 72);// 폰트 사이즈
 	cFont.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
 		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
 	SetFont(&cFont, TRUE);
@@ -250,7 +250,7 @@ void PrintPreview::OnPrint(CDC *cdc, CPrintInfo *pInfo, UINT page) {
 	pOldBitmap = memDC.SelectObject(&bitmap);
 	memDC.FillSolidRect(CRect(0, 0, horiPaper, verPaper), RGB(255, 255, 255));
 	CFont cFont;//CreateFont에 값18을 textEdit의 rowHight로 바꿔야함
-	int ih = MulDiv(20 * (this->lastClass->classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc, LOGPIXELSY), 72);// 폰트 사이즈
+	int ih = MulDiv(14 * (this->lastClass->classDiagramForm->zoomRate - 0) / 100, GetDeviceCaps(dc, LOGPIXELSY), 72);// 폰트 사이즈
 	cFont.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,// 글꼴 설정
 		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
 	SetFont(&cFont, TRUE);

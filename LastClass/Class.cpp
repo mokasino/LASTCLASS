@@ -1076,7 +1076,7 @@ void Class::GetSpaceWidth(ClassDiagramForm *classDiagramForm) {
 	Long bigger = 0;
 	Long space = 0;
 	CDC *dc = classDiagramForm->GetDC();
-	int ih = MulDiv(20 * (classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
+	int ih = MulDiv(14 * (classDiagramForm->zoomRate - 0) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
 	cFont.CreateFont(ih, 0, 0, 0, FW_NORMAL, FALSE, FALSE, 0, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, "굴림체");
 	CFont *oldFont = dc->SelectObject(&cFont);   // 폰트 시작
@@ -1103,7 +1103,7 @@ void Class::GetSpaceHeight(ClassDiagramForm *classDiagramForm) {
 	size_t offset = 0;
 
 	CDC *dc = classDiagramForm->GetDC();
-	int ih = MulDiv(20 * (classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
+	int ih = MulDiv(14 * (classDiagramForm->zoomRate - 0) / 100, GetDeviceCaps(dc->m_hDC, LOGPIXELSY), 72);
 
 	SmartPointer<Figure*> iterator(this->CreateIterator());
 	for (iterator->First();!iterator->IsDone();iterator->Next()) {

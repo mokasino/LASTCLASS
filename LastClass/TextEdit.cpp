@@ -79,7 +79,7 @@ int TextEdit::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	CWnd::SetFocus();
 
 	CDC *pDC = this->GetDC();
-	this->rowHeight = MulDiv(20 * (this->classDiagramForm->zoomRate - 30) / 100, GetDeviceCaps(pDC->m_hDC, LOGPIXELSY), 72);// 폰트 사이즈
+	this->rowHeight = MulDiv(14 * (this->classDiagramForm->zoomRate - 0) / 100, GetDeviceCaps(pDC->m_hDC, LOGPIXELSY), 72);// 폰트 사이즈
 
 	this->text = new Text;
 	this->caret = new Caret;
